@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class AppLogo extends StatelessWidget {
@@ -60,6 +62,47 @@ class AppLogo extends StatelessWidget {
             child: Image.asset('assets/images/dchakra.png'),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class GlassEffect extends StatelessWidget {
+  final Widget child;
+  final double width;
+  final double height;
+
+  //constructor
+
+  const GlassEffect({
+    super.key,
+    required this.child,
+    required this.width,
+    required this.height,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(18),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+        child: Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                const Color.fromARGB(6, 248, 223, 140),
+                const Color.fromARGB(22, 0, 0, 0),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: Center(child: child),
+        ),
       ),
     );
   }

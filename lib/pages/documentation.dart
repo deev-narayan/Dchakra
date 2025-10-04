@@ -12,31 +12,17 @@ class Documentation extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              top: 30,
-              right: -42,
+              top: 55,
+              right: -320,
               child: SizedBox(
-                height: 200,
-                width: 200,
-                child: AppLogo(size: 100),
+                height: 650,
+                width: 650,
+                child: Hero(tag: 'appLogoHero',
+                child: AppLogo(size: 350)),
               ),
             ),
-            Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    const Color.fromARGB(0, 241, 241, 241),
-                    const Color.fromARGB(100, 0, 0, 0),
-                  ],
-                ),
-              ),
-            ),
-            Center(child: AppLogo(size: 0)),
-            Center(child: SizedBox(height: 400,width: 150,),),
-            Center(child: Text("Documentation here")),
+            
+            Center(child: GlassEffect(width: double.infinity, height: double.infinity, child: Text("data"))),
           ],
         ),
       ),
