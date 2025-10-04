@@ -1,10 +1,8 @@
-import 'package:dchakra/fade/fade_ani_chain.dart';
 import 'package:dchakra/icons/logo.dart';
-import 'package:dchakra/pages/level_documentation.dart';
 import 'package:flutter/material.dart';
 
-class Documentation extends StatelessWidget {
-  const Documentation({super.key});
+class LevelDocumentation extends StatelessWidget {
+  const LevelDocumentation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,32 +17,26 @@ class Documentation extends StatelessWidget {
               child: SizedBox(
                 height: 650,
                 width: 650,
-                child: AppLogo(size: 350),
+                child: FadeTransitionSample(
+                  begin: 0.0,
+                  end: 1.0,
+                  child: AppLogo(size: 350),
+                ),
               ),
             ),
+
             Center(child: LinrGrage()),
             Center(
               child: GlassEffect(
                 width: double.infinity,
                 height: double.infinity,
-                child: Center(
-                  child: SequentialFadeDemo(
-                    onDone: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return LevelDocumentation();
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                child: Center(child: Text("data")),
               ),
             ),
           ],
         ),
       ),
     );
+    ;
   }
 }
