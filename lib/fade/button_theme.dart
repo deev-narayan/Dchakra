@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+
+class BtnTheme extends StatelessWidget {
+  final Widget child;
+  final String text;
+  const BtnTheme({super.key, required this.child, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) {
+              return child;
+            },
+          ),
+        );
+      },
+      style: OutlinedButton.styleFrom(
+        padding: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        side: BorderSide(
+          color: const Color.fromARGB(94, 151, 144, 83),
+          width: 1,
+        ),
+      ),
+      child: Ink(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              const Color.fromARGB(52, 248, 223, 140),
+              const Color.fromARGB(66, 0, 0, 0),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(25),
+        ),
+        child: Container(
+          height: 50,
+          width: 180,
+          alignment: Alignment.center,
+          child: Text(
+            text,
+            style: const TextStyle(
+              color: Color.fromARGB(127, 255, 216, 45),
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

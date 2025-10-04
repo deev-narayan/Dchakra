@@ -1,3 +1,4 @@
+import 'package:dchakra/fade/button_theme.dart';
 import 'package:dchakra/icons/logo.dart';
 import 'package:dchakra/pages/documentation.dart';
 import 'package:flutter/material.dart';
@@ -28,53 +29,7 @@ class WelcomePage extends StatelessWidget {
           left: 0,
           right: 0,
           child: Center(
-            child: OutlinedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return Documentation();
-                    },
-                  ),
-                );
-              },
-              style: OutlinedButton.styleFrom(
-                padding: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                side: BorderSide(
-                  color: const Color.fromARGB(94, 151, 144, 83),
-                  width: 1,
-                ),
-              ),
-              child: Ink(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color.fromARGB(52, 248, 223, 140),
-                      const Color.fromARGB(66, 0, 0, 0),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: Container(
-                  height: 50,
-                  width: 180,
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'Login with Google',
-                    style: TextStyle(
-                      color: Color.fromARGB(127, 255, 216, 45),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            child: BtnTheme(text: "Login with Google", child: Documentation()),
           ),
         ),
       ],

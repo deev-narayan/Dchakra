@@ -132,7 +132,17 @@ class LinrGrage extends StatelessWidget {
 
 class FadeTransitionSample extends StatefulWidget {
   final Widget child;
-  const FadeTransitionSample({super.key, required this.child});
+  final double begin;
+  final double end;
+  final VoidCallback? onFadeComplete;
+
+  const FadeTransitionSample({
+    super.key,
+    required this.child,
+    required this.begin,
+    required this.end,
+    this.onFadeComplete,
+  });
 
   @override
   State<FadeTransitionSample> createState() => _FadeTransitionSampleState();
@@ -146,22 +156,26 @@ class _FadeTransitionSampleState extends State<FadeTransitionSample>
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
     );
 
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _fadeAnimation = Tween<double>(
+      begin: widget.begin,
+      end: widget.end,
+    ).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
 
-    // Start fade-in
     _controller.forward();
 
-    // When fade-in completes, start fade-out only once
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        _controller.reverse(); // fade out once
+        _controller.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        widget.onFadeComplete?.call(); // ✅ triggers correctly now
       }
     });
   }

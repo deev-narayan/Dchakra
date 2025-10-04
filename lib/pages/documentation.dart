@@ -1,3 +1,4 @@
+import 'package:dchakra/fade/fade_ani_chain.dart';
 import 'package:dchakra/icons/logo.dart';
 import 'package:flutter/material.dart';
 
@@ -25,21 +26,9 @@ class Documentation extends StatelessWidget {
               child: GlassEffect(
                 width: double.infinity,
                 height: double.infinity,
-                child: FadeTransitionSample(child: Center(
-                  child: Text(
-                    "Welcome to Dchakra",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontFamily: 'fancy',
-                      fontWeight: FontWeight.w100,
-                      color: const Color.fromARGB(34, 255, 255, 255),
-                    ),
-                  ),
-                ),),
+                child: Center(child: SequentialFadeDemo()),
               ),
             ),
-            
           ],
         ),
       ),
