@@ -25,7 +25,7 @@ class Documentation extends StatelessWidget {
               child: GlassEffect(
                 width: double.infinity,
                 height: double.infinity,
-                child: Center(
+                child: FadeTransitionSample(child: Center(
                   child: Text(
                     "Welcome to Dchakra",
                     textAlign: TextAlign.center,
@@ -36,9 +36,10 @@ class Documentation extends StatelessWidget {
                       color: const Color.fromARGB(34, 255, 255, 255),
                     ),
                   ),
-                ),
+                ),),
               ),
             ),
+            
           ],
         ),
       ),
