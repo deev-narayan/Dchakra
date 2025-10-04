@@ -10,7 +10,19 @@ class WelcomePage extends StatelessWidget {
     return Container(
       child: Stack(
         children: [
-          Center(child: AppLogo(size: 278,)),
+          Stack(
+  children: [
+    Positioned(
+      top: MediaQuery.of(context).size.height * 0.5,
+      left: MediaQuery.of(context).size.width * 0.5,
+      child: Transform.translate(
+        offset: Offset(-611 / 2, -611 / 2),
+        child: AppLogo(size: 278,)
+      ),
+    ),
+  ],
+),
+
           Container(
             height: double.infinity,
             width: double.infinity,

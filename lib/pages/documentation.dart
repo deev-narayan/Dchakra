@@ -7,14 +7,13 @@ class Documentation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(leading: BackButton()),
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Stack(
           children: [
             Positioned(
               top: 30,
-              right: -40,
+              right: -42,
               child: SizedBox(
                 height: 200,
                 width: 200,
@@ -22,20 +21,21 @@ class Documentation extends StatelessWidget {
               ),
             ),
             Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  const Color.fromARGB(0, 241, 241, 241),
-                  const Color.fromARGB(100, 0, 0, 0),
-                ],
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    const Color.fromARGB(0, 241, 241, 241),
+                    const Color.fromARGB(100, 0, 0, 0),
+                  ],
+                ),
               ),
             ),
-          ),
             Center(child: AppLogo(size: 0)),
+            Center(child: SizedBox(height: 400,width: 150,),),
             Center(child: Text("Documentation here")),
           ],
         ),
