@@ -107,3 +107,25 @@ class GlassEffect extends StatelessWidget {
     );
   }
 }
+
+class LinrGrage extends StatelessWidget {
+  const LinrGrage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            const Color.fromARGB(0, 241, 241, 241),
+            const Color.fromARGB(100, 0, 0, 0),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -17,12 +17,28 @@ class Documentation extends StatelessWidget {
               child: SizedBox(
                 height: 650,
                 width: 650,
-                child: Hero(tag: 'appLogoHero',
-                child: AppLogo(size: 350)),
+                child: AppLogo(size: 350),
               ),
             ),
-            
-            Center(child: GlassEffect(width: double.infinity, height: double.infinity, child: Text("data"))),
+            Center(child: LinrGrage()),
+            Center(
+              child: GlassEffect(
+                width: double.infinity,
+                height: double.infinity,
+                child: Center(
+                  child: Text(
+                    "Welcome to Dchakra",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontFamily: 'fancy',
+                      fontWeight: FontWeight.w100,
+                      color: const Color.fromARGB(34, 255, 255, 255),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

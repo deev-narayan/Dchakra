@@ -16,27 +16,13 @@ class WelcomePage extends StatelessWidget {
               left: MediaQuery.of(context).size.width * 0.5,
               child: Transform.translate(
                 offset: Offset(-611 / 2, -611 / 2),
-                child: Hero(tag: 'appLogoHero',
-                child: AppLogo(size: 278)),
+                child: Hero(tag: 'appLogoHero', child: AppLogo(size: 278)),
               ),
             ),
           ],
         ),
-    
-        Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                const Color.fromARGB(0, 241, 241, 241),
-                const Color.fromARGB(100, 0, 0, 0),
-              ],
-            ),
-          ),
-        ),
+
+        Center(child: LinrGrage()),
         Positioned(
           bottom: 100,
           left: 0,
