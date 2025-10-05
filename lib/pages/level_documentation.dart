@@ -13,18 +13,11 @@ class LevelDocumentation extends StatelessWidget {
           children: [
             Positioned(
               top: 55,
-              right: -320,
-              child: SizedBox(
-                height: 650,
-                width: 650,
-                child: FadeTransitionSample(
-                  begin: 0.0,
-                  end: 1.0,
-                  child: AppLogo(size: 350),
-                ),
-              ),
+              height: 650,
+              width: 650,
+              left: -320,
+              child: SizedBox(child: AppLogo()),
             ),
-
             Center(child: LinrGrage()),
             Center(
               child: GlassEffect(
@@ -33,34 +26,79 @@ class LevelDocumentation extends StatelessWidget {
                 child: Stack(
                   children: [
                     Positioned(
-                      top: 0,
+                      top: 20,
                       left: 0,
                       right: 0,
                       child: Container(
                         height: 55,
                         width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              const Color.fromARGB(38, 248, 223, 140),
-                              const Color.fromARGB(22, 0, 0, 0),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          border: BoxBorder.fromLTRB(
-                            bottom: BorderSide(
-                              width: 1,
-                              color: const Color.fromARGB(47, 151, 144, 83),
+
+                        child: Center(
+                          child: Text(
+                            "Chakra Progress Tracker",
+                            style: const TextStyle(
+                              color: Color.fromARGB(92, 255, 255, 255),
+                              fontWeight: FontWeight.w100,
+                              fontSize: 22,
                             ),
                           ),
                         ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        height: 70,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          border: BorderDirectional(
+                            top: BorderSide(
+                              width: 1,
+                              color: const Color.fromARGB(22, 255, 255, 255),
+                            ),
+                          ),
+                        ),
+                        child: Container(
+                          margin: const EdgeInsets.all(10.0),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.home_rounded),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.calendar_month_rounded),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.settings),
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.person),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(0, 85, 0, 71),
+                        height: double.infinity,
+                        width: double.infinity,
                         child: Center(
                           child: Text(
-                            "Chakra current Level",
+                            "Chakra Progress Tracker",
                             style: const TextStyle(
                               color: Color.fromARGB(92, 255, 255, 255),
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w100,
                               fontSize: 22,
                             ),
                           ),
