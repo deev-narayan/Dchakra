@@ -29,7 +29,7 @@ class LevelDocumentation extends StatelessWidget {
                       top: 20,
                       left: 0,
                       right: 0,
-                      child: Container(
+                      child: SizedBox(
                         height: 55,
                         width: double.infinity,
 
@@ -94,12 +94,34 @@ class LevelDocumentation extends StatelessWidget {
                         height: double.infinity,
                         width: double.infinity,
                         child: Center(
-                          child: Text(
-                            "Chakra Progress Tracker",
-                            style: const TextStyle(
-                              color: Color.fromARGB(92, 255, 255, 255),
-                              fontWeight: FontWeight.w100,
-                              fontSize: 22,
+                          child: Container(
+                            margin: EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(113, 0, 0, 0),
+                              borderRadius: BorderRadius.circular(45),
+                              border: Border.all(width: 1, color: const Color.fromARGB(34, 255, 255, 255)),
+                            ),
+                            child: TextButton(
+                              onPressed: () {  },
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    height: 70,
+                                    width: 70,
+                                    child: Image.asset(
+                                      "assets/images/Muladhara.png",
+                                    ),
+                                  ),
+                                  Text(
+                                    "Muladhara Chakra",
+                                    style: const TextStyle(
+                                      color: Color.fromARGB(92, 255, 255, 255),
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 25,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
