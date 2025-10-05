@@ -51,7 +51,7 @@ class LevelDocumentation extends StatelessWidget {
                           border: BoxBorder.fromLTRB(
                             bottom: BorderSide(
                               width: 1,
-                              color: const Color.fromARGB(94, 151, 144, 83),
+                              color: const Color.fromARGB(47, 151, 144, 83),
                             ),
                           ),
                         ),
@@ -59,7 +59,7 @@ class LevelDocumentation extends StatelessWidget {
                           child: Text(
                             "Chakra current Level",
                             style: const TextStyle(
-                              color: Color.fromARGB(61, 255, 216, 45),
+                              color: Color.fromARGB(92, 255, 255, 255),
                               fontWeight: FontWeight.w600,
                               fontSize: 22,
                             ),
