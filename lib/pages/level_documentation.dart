@@ -30,13 +30,50 @@ class LevelDocumentation extends StatelessWidget {
               child: GlassEffect(
                 width: double.infinity,
                 height: double.infinity,
-                child: Center(child: Text("data")),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        height: 55,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              const Color.fromARGB(38, 248, 223, 140),
+                              const Color.fromARGB(22, 0, 0, 0),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          border: BoxBorder.fromLTRB(
+                            bottom: BorderSide(
+                              width: 1,
+                              color: const Color.fromARGB(94, 151, 144, 83),
+                            ),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Chakra current Level",
+                            style: const TextStyle(
+                              color: Color.fromARGB(61, 255, 216, 45),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 22,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
         ),
       ),
     );
-    ;
   }
 }

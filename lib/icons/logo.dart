@@ -84,7 +84,6 @@ class GlassEffect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(18),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
         child: Container(
@@ -99,7 +98,6 @@ class GlassEffect extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(18),
           ),
           child: Center(child: child),
         ),
@@ -165,9 +163,7 @@ class _FadeTransitionSampleState extends State<FadeTransitionSample>
     _fadeAnimation = Tween<double>(
       begin: widget.begin,
       end: widget.end,
-    ).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
     _controller.forward();
 
@@ -188,9 +184,6 @@ class _FadeTransitionSampleState extends State<FadeTransitionSample>
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _fadeAnimation,
-      child: widget.child,
-    );
+    return FadeTransition(opacity: _fadeAnimation, child: widget.child);
   }
 }

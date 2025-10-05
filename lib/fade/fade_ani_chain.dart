@@ -45,7 +45,7 @@ class _SequentialFadeDemoState extends State<SequentialFadeDemo> {
                 end: 1.0,
                 onFadeComplete: _nextStep,
                 child: const Text(
-                  "Welcome to Dchakra",
+                  "Welcome to \nDchakra",
                   textAlign: TextAlign.center,
                   style: textStyle,
                 ),
