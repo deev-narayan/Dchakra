@@ -122,11 +122,14 @@ class ChakraList extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(35),
-                child: Image.asset(
-                  image,
-                  height: 50,
-                  width: 50,
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: name,
+                  child: Image.asset(
+                    image,
+                    height: 50,
+                    width: 50,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               const SizedBox(width: 16),
