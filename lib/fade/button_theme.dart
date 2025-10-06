@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class BtnTheme extends StatelessWidget {
   final Widget child;
   final String text;
-  const BtnTheme({super.key, required this.child, required this.text});
+  final Color color;
+  const BtnTheme({super.key, required this.child, required this.text, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class BtnTheme extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              const Color.fromARGB(52, 248, 223, 140),
+              color,
               const Color.fromARGB(66, 0, 0, 0),
             ],
             begin: Alignment.topLeft,
@@ -44,7 +45,7 @@ class BtnTheme extends StatelessWidget {
           child: Text(
             text,
             style: const TextStyle(
-              color: Color.fromARGB(127, 255, 216, 45),
+              color: Color.fromARGB(190, 255, 255, 255),
               fontWeight: FontWeight.w500,
               fontSize: 16,
             ),

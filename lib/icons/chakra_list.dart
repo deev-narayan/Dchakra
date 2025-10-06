@@ -108,7 +108,7 @@ class ChakraList extends StatelessWidget {
                   return ItemDetailInfo(
                     name: name,
                     image: image,
-                    color: color,
+                    color: color.toString(),
                     element: element,
                     location: location,
                     function: function,
