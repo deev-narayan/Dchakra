@@ -56,7 +56,7 @@ class ItemDetailInfo extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(12),
                   width: double.infinity,
-                  child: Center(child: Text(name)),
+                  child: Center(child: Text(name,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18))),
                 ),
                 Hero(tag: name,child: Image.asset(image)),
                 Padding(

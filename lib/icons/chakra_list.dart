@@ -91,7 +91,7 @@ class ChakraList extends StatelessWidget {
           borderRadius: BorderRadius.circular(45),
           border: Border.all(
             width: 1,
-            color: const Color.fromARGB(34, 255, 255, 255),
+            color: getChakraColor(color),
           ),
         ),
         child: TextButton(

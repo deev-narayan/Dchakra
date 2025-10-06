@@ -22,7 +22,7 @@ class BtnTheme extends StatelessWidget {
         padding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         side: BorderSide(
-          color: const Color.fromARGB(94, 151, 144, 83),
+          color: color,
           width: 1,
         ),
       ),

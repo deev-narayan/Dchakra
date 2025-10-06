@@ -37,7 +37,7 @@ class LevelDocumentation extends StatelessWidget {
                           child: Text(
                             "Chakra Progress Tracker",
                             style: const TextStyle(
-                              color: Color.fromARGB(58, 255, 255, 255),
+                              color: Color.fromARGB(207, 255, 255, 255),
                               fontWeight: FontWeight.w500,
                               fontSize: 22,
                             ),
