@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Muladhara Chakra",
+    "color": "Red",
+    "element": "Earth",
+    "location": "at the base of the spine",
+    "function": "improve the survival and basic human instinct",
+    "mantra": "Lam",
+    "image": "assets/images/Muladhara.png"
+  },
+  {
+    "name": "Swadhisthana Chakra",
+    "color": "Orange",
+    "element": "Water",
+    "location": "in the sacrum area",
+    "function": "reproductive health and creative energy",
+    "mantra": "Vam",
+    "image": "assets/images/Swadhisthana.png"
+  },
+  {
+    "name": "Manipura Chakra",
+    "color": "Yellow",
+    "element": "Fire",
+    "location": "in the stomach area",
+    "function": "digestive health, along with power and self-esteem",
+    "mantra": "Ram",
+    "image": "assets/images/Manipura.png"
+  },
+  {
+    "name": "Anahata Chakra",
+    "color": "Green",
+    "element": "Air",
+    "location": "in the chest near the heart",
+    "function": "responsible for inner peace, love and devotion",
+    "mantra": "Yam",
+    "image": "assets/images/Anahata.png"
+  },
+  {
+    "name": "Vishuddha Chakra",
+    "color": "Blue",
+    "element": "Space",
+    "location": "in the throat",
+    "function": "communication and self-expression",
+    "mantra": "Ham",
+    "image": "assets/images/Vishuddha.png"
+  },
+  {
+    "name": "Ajna Chakra",
+    "color": "Indigo",
+    "element": "none",
+    "location": "between the eyebrows",
+    "function": "intuition and imagination",
+    "mantra": "Aum",
+    "image": "assets/images/Ajna.png"
+  },
+  {
+    "name": "Sahasrara Chakra",
+    "color": "Violet",
+    "element": "none",
+    "location": "at the top of the head",
+    "function": "spiritual connection and enlightenment",
+    "mantra": "Aum",
+    "image": "assets/images/Sahasrara.png"
+  }
+]

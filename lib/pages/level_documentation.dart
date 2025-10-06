@@ -1,3 +1,4 @@
+import 'package:dchakra/icons/chakra_list.dart';
 import 'package:dchakra/icons/logo.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class LevelDocumentation extends StatelessWidget {
               height: 650,
               width: 650,
               left: -320,
-              child: SizedBox(child: AppLogo()),
+              child: Opacity(opacity: 0.1,child: SizedBox(child: AppLogo())),
             ),
             Center(child: LinrGrage()),
             Center(
@@ -26,19 +27,18 @@ class LevelDocumentation extends StatelessWidget {
                 child: Stack(
                   children: [
                     Positioned(
-                      top: 20,
+                      top: 15,
                       left: 0,
                       right: 0,
                       child: SizedBox(
                         height: 55,
                         width: double.infinity,
-
                         child: Center(
                           child: Text(
                             "Chakra Progress Tracker",
                             style: const TextStyle(
-                              color: Color.fromARGB(92, 255, 255, 255),
-                              fontWeight: FontWeight.w100,
+                              color: Color.fromARGB(58, 255, 255, 255),
+                              fontWeight: FontWeight.w500,
                               fontSize: 22,
                             ),
                           ),
@@ -93,38 +93,7 @@ class LevelDocumentation extends StatelessWidget {
                         margin: EdgeInsets.fromLTRB(0, 85, 0, 71),
                         height: double.infinity,
                         width: double.infinity,
-                        child: Center(
-                          child: Container(
-                            margin: EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(113, 0, 0, 0),
-                              borderRadius: BorderRadius.circular(45),
-                              border: Border.all(width: 1, color: const Color.fromARGB(34, 255, 255, 255)),
-                            ),
-                            child: TextButton(
-                              onPressed: () {  },
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    height: 70,
-                                    width: 70,
-                                    child: Image.asset(
-                                      "assets/images/Muladhara.png",
-                                    ),
-                                  ),
-                                  Text(
-                                    "Muladhara Chakra",
-                                    style: const TextStyle(
-                                      color: Color.fromARGB(92, 255, 255, 255),
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: 25,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: Center(child: ContainList()),
                       ),
                     ),
                   ],

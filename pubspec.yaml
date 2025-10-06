@@ -59,6 +59,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/data/
+
   fonts:
     - family: 'fancy'
       fonts:
