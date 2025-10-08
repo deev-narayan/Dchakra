@@ -60,6 +60,10 @@ flutter:
   assets:
     - assets/images/
     - assets/data/
+    - assets/muladhara/
+    - assets/swadhisthana/
+    - assets/manipura/
+    - assets/anahata/
 
   fonts:
     - family: 'fancy'

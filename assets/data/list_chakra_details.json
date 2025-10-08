@@ -6,7 +6,15 @@
     "location": "at the base of the spine",
     "function": "improve the survival and basic human instinct",
     "mantra": "Lam",
-    "image": "assets/images/Muladhara.png"
+    "image": "assets/images/Muladhara.png",
+    "yogasana":{
+      "Child Pose":"assets/muladhara/1.png",
+      "Malasana":"assets/muladhara/2.png",
+      "Savasana":"assets/muladhara/3.png",
+      "Tadasana":"assets/muladhara/4.png",
+      "Virabhadrasana":"assets/muladhara/5.png",
+      "Vrksasana":"assets/muladhara/6.png"
+    }
   },
   {
     "name": "Swadhisthana Chakra",
@@ -15,7 +23,15 @@
     "location": "in the sacrum area",
     "function": "reproductive health and creative energy",
     "mantra": "Vam",
-    "image": "assets/images/Swadhisthana.png"
+    "image": "assets/images/Swadhisthana.png",
+    "yogasana": {
+      "Baddha Konasana": "assets/swadhisthana/1.png",
+      "Garbha Pindasana": "assets/swadhisthana/2.png",
+      "Seated Forward Bend": "assets/swadhisthana/3.png",
+      "Boat Pose": "assets/swadhisthana/4.png",
+      "Cat-Cow Pose": "assets/swadhisthana/5.png",
+      "Bridge Pose": "assets/swadhisthana/6.png"
+    }
   },
   {
     "name": "Manipura Chakra",
@@ -24,7 +40,15 @@
     "location": "in the stomach area",
     "function": "digestive health, along with power and self-esteem",
     "mantra": "Ram",
-    "image": "assets/images/Manipura.png"
+    "image": "assets/images/Manipura.png",
+    "yogasana": {
+      "Boat Pose": "assets/manipura/1.png",
+      "Navasana": "assets/manipura/2.png",
+      "Warrior Pose": "assets/manipura/3.png",
+      "Bow Pose": "assets/manipura/4.png",
+      "Plank Pose": "assets/manipura/5.png",
+      "Cobra Pose": "assets/manipura/6.png"
+    }
   },
   {
     "name": "Anahata Chakra",
@@ -33,7 +57,15 @@
     "location": "in the chest near the heart",
     "function": "responsible for inner peace, love and devotion",
     "mantra": "Yam",
-    "image": "assets/images/Anahata.png"
+    "image": "assets/images/Anahata.png",
+    "yogasana": {
+      "Camel Pose": "assets/anahata/1.png",
+      "Bridge Pose": "assets/anahata/2.png",
+      "Cobra Pose": "assets/anahata/3.png",
+      "Fish Pose": "assets/anahata/4.png",
+      "Upward Facing Dog": "assets/anahata/5.png",
+      "Cow Face Pose": "assets/anahata/6.png"
+    }
   },
   {
     "name": "Vishuddha Chakra",
@@ -42,7 +74,15 @@
     "location": "in the throat",
     "function": "communication and self-expression",
     "mantra": "Ham",
-    "image": "assets/images/Vishuddha.png"
+    "image": "assets/images/Vishuddha.png",
+    "yogasana": {
+      "Plow Pose": "assets/vishuddha/1.png",
+      "Shoulder Stand": "assets/vishuddha/2.png",
+      "Fish Pose": "assets/vishuddha/3.png",
+      "Lion Pose": "assets/vishuddha/4.png",
+      "Bridge Pose": "assets/vishuddha/5.png",
+      "Cat Pose": "assets/vishuddha/6.png"
+    }
   },
   {
     "name": "Ajna Chakra",
@@ -51,7 +91,15 @@
     "location": "between the eyebrows",
     "function": "intuition and imagination",
     "mantra": "Aum",
-    "image": "assets/images/Ajna.png"
+    "image": "assets/images/Ajna.png",
+    "yogasana": {
+      "Child Pose": "assets/ajna/1.png",
+      "Downward Dog": "assets/ajna/2.png",
+      "Easy Pose": "assets/ajna/3.png",
+      "Seated Forward Fold": "assets/ajna/4.png",
+      "Plow Pose": "assets/ajna/5.png",
+      "Corpse Pose": "assets/ajna/6.png"
+    }
   },
   {
     "name": "Sahasrara Chakra",
@@ -60,6 +108,14 @@
     "location": "at the top of the head",
     "function": "spiritual connection and enlightenment",
     "mantra": "Aum",
-    "image": "assets/images/Sahasrara.png"
+    "image": "assets/images/Sahasrara.png",
+    "yogasana": {
+      "Headstand": "assets/sahasrara/1.png",
+      "Corpse Pose": "assets/sahasrara/2.png",
+      "Lotus Pose": "assets/sahasrara/3.png",
+      "Child Pose": "assets/sahasrara/4.png",
+      "Tree Pose": "assets/sahasrara/5.png",
+      "Seated Meditation": "assets/sahasrara/6.png"
+    }
   }
 ]

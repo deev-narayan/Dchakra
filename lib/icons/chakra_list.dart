@@ -37,6 +37,11 @@ class _ContainListState extends State<ContainList> {
 
     return ListView(
       children: chakraData.map((item) {
+        Map<String, String> yogasanaMap = {};
+        if (item['yogasana'] != null) {
+          yogasanaMap = Map<String, String>.from(item['yogasana']);
+        }
+
         return ChakraList(
           name: item['name'],
           image: item['image'],
@@ -45,6 +50,7 @@ class _ContainListState extends State<ContainList> {
           location: item['location'],
           function: item['function'],
           mantra: item['mantra'],
+          yogasana: yogasanaMap,
         );
       }).toList(),
     );
@@ -59,6 +65,7 @@ class ChakraList extends StatelessWidget {
   final String location;
   final String function;
   final String mantra;
+  final Map<String, String> yogasana;
 
   const ChakraList({
     super.key,
@@ -69,6 +76,7 @@ class ChakraList extends StatelessWidget {
     required this.location,
     required this.function,
     required this.mantra,
+    required this.yogasana,
   });
 
   @override
@@ -89,10 +97,7 @@ class ChakraList extends StatelessWidget {
             begin: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(45),
-          border: Border.all(
-            width: 1,
-            color: getChakraColor(color),
-          ),
+          border: Border.all(width: 1, color: getChakraColor(color)),
         ),
         child: TextButton(
           style: TextButton.styleFrom(
@@ -113,6 +118,7 @@ class ChakraList extends StatelessWidget {
                     location: location,
                     function: function,
                     mantra: mantra,
+                    yogasana: yogasana,
                   );
                 },
               ),

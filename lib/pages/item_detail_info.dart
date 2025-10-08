@@ -1,7 +1,8 @@
 import 'package:dchakra/fade/button_theme.dart';
 import 'package:dchakra/icons/logo.dart';
-import 'package:dchakra/pages/documentation.dart';
+import 'package:dchakra/pages/yoga&meditaton/balance_menu.dart';
 import 'package:flutter/material.dart';
+
 Color getChakraColor(String colorName) {
   switch (colorName.toLowerCase()) {
     case 'red':
@@ -31,6 +32,7 @@ class ItemDetailInfo extends StatelessWidget {
   final String location;
   final String function;
   final String mantra;
+  final Map<String, String> yogasana;
 
   const ItemDetailInfo({
     super.key,
@@ -41,6 +43,7 @@ class ItemDetailInfo extends StatelessWidget {
     required this.location,
     required this.function,
     required this.mantra,
+    required this.yogasana,
   });
 
   @override
@@ -56,9 +59,22 @@ class ItemDetailInfo extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(12),
                   width: double.infinity,
-                  child: Center(child: Text(name,style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18))),
+                  child: Row(
+                    children: [
+                      BackButton(),
+                      Center(
+                        child: Text(
+                          name,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                Hero(tag: name,child: Image.asset(image)),
+                SizedBox(height: 300,child: Hero(tag: name, child: Image.asset(image))),
                 Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Column(
@@ -136,14 +152,17 @@ class ItemDetailInfo extends StatelessWidget {
               ],
             ),
             Positioned(
-          bottom: 15,
-          left: 0,
-          right: 0,
-          child: Center(
-            child: BtnTheme(text: "Balance It", color: getChakraColor(color),
-            child: Documentation()),
-          ),
-        ),
+              bottom: 15,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: BtnTheme(
+                  text: "Balance It",
+                  color: getChakraColor(color),
+                  child: BalanceMenu(yogasana: yogasana,name: name,),
+                ),
+              ),
+            ),
           ],
         ),
       ),
