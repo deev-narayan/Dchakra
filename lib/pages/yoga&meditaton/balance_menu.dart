@@ -1,11 +1,19 @@
 import 'package:dchakra/icons/logo.dart';
+import 'package:dchakra/pages/item_detail_info.dart';
+import 'package:dchakra/pages/yoga&meditaton/timer_bar.dart';
 import 'package:flutter/material.dart';
 
 class BalanceMenu extends StatefulWidget {
   final String name;
+  final String color;
   final Map<String, String> yogasana;
 
-  const BalanceMenu({super.key, required this.yogasana, required this.name});
+  const BalanceMenu({
+    super.key,
+    required this.yogasana,
+    required this.name,
+    required this.color,
+  });
 
   @override
   _BalanceMenuState createState() => _BalanceMenuState();
@@ -82,7 +90,7 @@ class _BalanceMenuState extends State<BalanceMenu> {
                           border: BorderDirectional(
                             top: BorderSide(
                               width: 1,
-                              color: const Color.fromARGB(22, 255, 255, 255),
+                              color: const Color.fromARGB(21, 255, 255, 255),
                             ),
                           ),
                         ),
@@ -129,7 +137,7 @@ class _BalanceMenuState extends State<BalanceMenu> {
                 children: [
                   BackButton(color: Colors.white),
                   Text(
-                    widget.name, // You can replace this with actual chakra name if needed
+                    widget.name,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
@@ -141,14 +149,14 @@ class _BalanceMenuState extends State<BalanceMenu> {
             ),
             // YogasanaList widget directly inside Stack and centered with padding
             Positioned(
-              top: 80,
+              top: 40,
               left: 0,
               right: 0,
-              height: 420,
+              height: 650,
               child: Column(
                 children: [
                   SizedBox(
-                    height: 350,
+                    height: 400,
                     child: PageView.builder(
                       controller: _pageController,
                       itemCount: widget.yogasana.length,
@@ -162,19 +170,19 @@ class _BalanceMenuState extends State<BalanceMenu> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              margin: const EdgeInsets.all(16.0),
+                              margin: const EdgeInsets.all(10.0),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(18),
-                                color: Colors.white,
+                                color: const Color.fromARGB(255, 255, 251, 226),
                               ),
                               child: Image.asset(
                                 values[index],
-                                width: 300,
-                                fit: BoxFit.cover,
+                                height: 340,
+                                fit: BoxFit.contain,
                                 errorBuilder: (context, error, stackTrace) {
                                   return Icon(
                                     Icons.broken_image,
-                                    size: 100,
+                                    size: 200,
                                     color: Colors.red,
                                   );
                                 },
@@ -196,26 +204,17 @@ class _BalanceMenuState extends State<BalanceMenu> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      IconButton(
-                        icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-                        onPressed: _prevPage,
-                      ),
                       Text(
                         '${_currentPage + 1} / ${widget.yogasana.length}',
                         style: TextStyle(color: Colors.white),
                       ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.white,
-                        ),
-                        onPressed: _nextPage,
-                      ),
                     ],
                   ),
+                  
                 ],
               ),
             ),
+            Positioned(left: 0,right: 0,bottom: 80,child: CountdownTimer(nextPage: _nextPage,prevPage: _prevPage,color: getChakraColor(widget.color),))
           ],
         ),
       ),

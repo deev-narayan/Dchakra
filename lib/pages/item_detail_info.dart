@@ -5,22 +5,22 @@ import 'package:flutter/material.dart';
 
 Color getChakraColor(String colorName) {
   switch (colorName.toLowerCase()) {
-    case 'red':
-      return const Color.fromARGB(55, 244, 67, 54);
-    case 'orange':
-      return const Color.fromARGB(55, 255, 153, 0);
-    case 'yellow':
-      return const Color.fromARGB(55, 255, 235, 59);
-    case 'green':
-      return const Color.fromARGB(55, 76, 175, 79);
-    case 'blue':
-      return const Color.fromARGB(55, 33, 149, 243);
-    case 'indigo':
-      return const Color.fromARGB(55, 63, 81, 181);
-    case 'violet':
-      return const Color.fromARGB(55, 155, 39, 176);
+    case 'red':       // Root Chakra
+      return const Color.fromARGB(255, 183, 28, 28); // Deep Red
+    case 'orange':    // Sacral Chakra
+      return const Color.fromARGB(255, 255, 87, 34); // Bright Orange
+    case 'yellow':    // Solar Plexus Chakra
+      return const Color.fromARGB(255, 255, 193, 7); // Sunny Yellow
+    case 'green':     // Heart Chakra
+      return const Color.fromARGB(255, 76, 175, 80); // Vibrant Green
+    case 'blue':      // Throat Chakra
+      return const Color.fromARGB(255, 33, 150, 243); // Calm Blue
+    case 'indigo':    // Third Eye Chakra
+      return const Color.fromARGB(255, 63, 81, 181); // Deep Indigo
+    case 'violet':    // Crown Chakra
+      return const Color.fromARGB(255, 156, 39, 176); // Elegant Violet
     default:
-      return Colors.grey; // fallback color
+      return Colors.grey; // fallback neutral color
   }
 }
 
@@ -159,7 +159,7 @@ class ItemDetailInfo extends StatelessWidget {
                 child: BtnTheme(
                   text: "Balance It",
                   color: getChakraColor(color),
-                  child: BalanceMenu(yogasana: yogasana,name: name,),
+                  child: BalanceMenu(yogasana: yogasana,name: name,color: color,),
                 ),
               ),
             ),
