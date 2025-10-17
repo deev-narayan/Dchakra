@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dchakra/pages/item_detail_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'dart:developer' as developer;  // For logging errors
 
 String jsonPath = "assets/data/list_chakra_details.json";
 
@@ -22,11 +23,15 @@ class _ContainListState extends State<ContainList> {
   }
 
   Future<void> loadChakraData() async {
-    final String jsonString = await rootBundle.loadString(jsonPath);
-    final List<dynamic> data = json.decode(jsonString);
-    setState(() {
-      chakraData = data;
-    });
+    try {
+      final String jsonString = await rootBundle.loadString(jsonPath);
+      final List<dynamic> data = json.decode(jsonString);
+      setState(() {
+        chakraData = data;
+      });
+    } catch (e) {
+      developer.log('Error loading JSON: $e');  // Log any errors
+    }
   }
 
   @override
@@ -37,20 +42,25 @@ class _ContainListState extends State<ContainList> {
 
     return ListView(
       children: chakraData.map((item) {
-        Map<String, String> yogasanaMap = {};
-        if (item['yogasana'] != null) {
-          yogasanaMap = Map<String, String>.from(item['yogasana']);
+        Map<String, Map<String, dynamic>> yogasanaMap = {};  // Default empty map
+        if (item['yogasana'] != null && item['yogasana'] is Map<String, dynamic>) {
+          try {
+            Map<String, dynamic> rawYogasana = item['yogasana'];
+            yogasanaMap = rawYogasana.cast<String, Map<String, dynamic>>();
+          } catch (e) {
+            developer.log('Error casting yogasana for ${item['name']}: $e');
+          }
         }
 
         return ChakraList(
-          name: item['name'],
-          image: item['image'],
-          color: item['color'],
-          element: item['element'],
-          location: item['location'],
-          function: item['function'],
-          mantra: item['mantra'],
-          yogasana: yogasanaMap,
+          name: item['name'] as String? ?? 'Unknown',
+          image: item['image'] as String? ?? '',
+          color: item['color'] as String? ?? '',
+          element: item['element'] as String? ?? '',
+          location: item['location'] as String? ?? '',
+          function: item['function'] as String? ?? '',
+          mantra: item['mantra'] as String? ?? '',
+          yogasana: yogasanaMap,  // Now safely passed
         );
       }).toList(),
     );
@@ -65,7 +75,7 @@ class ChakraList extends StatelessWidget {
   final String location;
   final String function;
   final String mantra;
-  final Map<String, String> yogasana;
+  final Map<String, Map<String, dynamic>> yogasana;
 
   const ChakraList({
     super.key,
@@ -97,7 +107,7 @@ class ChakraList extends StatelessWidget {
             begin: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(45),
-          border: Border.all(width: 1, color: getChakraColor(color)),
+          border: Border.all(width: 1, color: getChakraColor(color)),  // Ensure this function exists
         ),
         child: TextButton(
           style: TextButton.styleFrom(
@@ -113,7 +123,7 @@ class ChakraList extends StatelessWidget {
                   return ItemDetailInfo(
                     name: name,
                     image: image,
-                    color: color.toString(),
+                    color: color,
                     element: element,
                     location: location,
                     function: function,

@@ -2,11 +2,12 @@ import 'package:dchakra/icons/logo.dart';
 import 'package:dchakra/pages/item_detail_info.dart';
 import 'package:dchakra/pages/yoga&meditaton/timer_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class BalanceMenu extends StatefulWidget {
   final String name;
   final String color;
-  final Map<String, String> yogasana;
+  final Map<String, dynamic> yogasana;  // Updated to Map<String, dynamic>
 
   const BalanceMenu({
     super.key,
@@ -22,11 +23,36 @@ class BalanceMenu extends StatefulWidget {
 class _BalanceMenuState extends State<BalanceMenu> {
   late PageController _pageController;
   int _currentPage = 0;
+  final FlutterTts _flutterTts = FlutterTts();
+  Map? _currentVoice;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
+    initTTS();
+  }
+
+  void initTTS() async {
+    try {
+      var data = await _flutterTts.getVoices;
+      List<Map> voices = List<Map>.from(data);
+      voices = voices.where((v) => v["name"].toString().contains("en")).toList();
+
+      if (voices.isNotEmpty) {
+        _currentVoice = voices.first;
+        setVoice(_currentVoice!);
+      }
+    } catch (e) {
+      // Handle error silently or log it
+    }
+  }
+
+  void setVoice(Map voice) {
+    _flutterTts.setVoice({
+      "name": voice["name"],
+      "locale": voice["locale"],
+    });
   }
 
   @override
@@ -57,8 +83,7 @@ class _BalanceMenuState extends State<BalanceMenu> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> keys = widget.yogasana.keys.toList();
-    List<String> values = widget.yogasana.values.toList();
+    List<String> keys = widget.yogasana.keys.toList();  // List of yogasana names
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -72,7 +97,7 @@ class _BalanceMenuState extends State<BalanceMenu> {
               left: -320,
               child: Opacity(opacity: 0.1, child: SizedBox(child: AppLogo())),
             ),
-            Center(child: LinrGrage()),
+            Center(child: LinrGrage()),  // Assuming this is a custom widget
             Center(
               child: GlassEffect(
                 width: double.infinity,
@@ -126,7 +151,6 @@ class _BalanceMenuState extends State<BalanceMenu> {
                 ),
               ),
             ),
-            // Top bar - use Positioned directly in Stack (not inside Column)
             Positioned(
               top: 0,
               left: 10,
@@ -147,7 +171,6 @@ class _BalanceMenuState extends State<BalanceMenu> {
                 ],
               ),
             ),
-            // YogasanaList widget directly inside Stack and centered with padding
             Positioned(
               top: 40,
               left: 0,
@@ -156,49 +179,56 @@ class _BalanceMenuState extends State<BalanceMenu> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 400,
-                    child: PageView.builder(
-                      controller: _pageController,
-                      itemCount: widget.yogasana.length,
-                      onPageChanged: (index) {
-                        setState(() {
-                          _currentPage = index;
-                        });
-                      },
-                      itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18),
-                                color: const Color.fromARGB(255, 255, 251, 226),
+                    height: 440,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: PageView.builder(
+                        controller: _pageController,
+                        itemCount: widget.yogasana.length,
+                        onPageChanged: (index) {
+                          _flutterTts.speak("The next sixty seconds ${keys[index]}");
+                          setState(() {
+                            _currentPage = index;
+                          });
+                        },
+                        itemBuilder: (context, index) {
+                          final yogasanaItem = widget.yogasana[keys[index]] as Map<String, dynamic>?;  // Get the inner map
+                          final imagePath = yogasanaItem?['image'] as String? ?? 'assets/placeholder.png';  // Safely get the image path
+                          
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.all(10.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(18),
+                                  color: const Color.fromARGB(255, 255, 255, 255),
+                                ),
+                                child: Image.asset(
+                                  imagePath,  // Now uses the correct image path
+                                  height: 340,
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Icon(
+                                      Icons.broken_image,
+                                      size: 200,
+                                      color: Colors.red,
+                                    );
+                                  },
+                                ),
                               ),
-                              child: Image.asset(
-                                values[index],
-                                height: 340,
-                                fit: BoxFit.contain,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Icon(
-                                    Icons.broken_image,
-                                    size: 200,
-                                    color: Colors.red,
-                                  );
-                                },
+                              SizedBox(height: 8),
+                              Text(
+                                keys[index],
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              keys[index],
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        );
-                      },
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   ),
                   Row(
@@ -209,12 +239,11 @@ class _BalanceMenuState extends State<BalanceMenu> {
                         style: TextStyle(color: Colors.white),
                       ),
                     ],
-                  ),
-                  
+                  )
                 ],
               ),
             ),
-            Positioned(left: 0,right: 0,bottom: 80,child: CountdownTimer(nextPage: _nextPage,prevPage: _prevPage,color: getChakraColor(widget.color),))
+            Positioned(left: 0, right: 0, bottom: 85, child: CountdownTimer(nextPage: _nextPage, prevPage: _prevPage, color: getChakraColor(widget.color))),
           ],
         ),
       ),

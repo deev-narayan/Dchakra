@@ -32,7 +32,7 @@ class ItemDetailInfo extends StatelessWidget {
   final String location;
   final String function;
   final String mantra;
-  final Map<String, String> yogasana;
+  final Map<String, Map<String, dynamic>> yogasana;
 
   const ItemDetailInfo({
     super.key,

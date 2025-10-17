@@ -75,7 +75,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
             style: TextStyle(fontSize: 70, fontWeight: FontWeight.w600),
           ),
         ),
-        SizedBox(height: 20),
+        SizedBox(height: 15),
         Container(
           color: Colors.transparent,
           child: ClipRRect(
