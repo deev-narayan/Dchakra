@@ -1,0 +1,457 @@
+[
+  {
+    "name": "Muladhara Chakra",
+    "color": "Red",
+    "element": "Earth",
+    "location": "at the base of the spine",
+    "function": "improve the survival and basic human instinct",
+    "mantra": "Lam",
+    "image": "assets/images/Muladhara.png",
+    "yogasana": {
+      "Child Pose": {
+        "image": "assets/muladhara/1.png",
+        "steps": [
+          "Kneel on the floor with your big toes touching and knees apart.",
+          "Sit back on your heels and stretch your arms forward on the floor.",
+          "Rest your forehead on the ground and relax your whole body.",
+          "Breathe deeply and stay in the pose for several breaths."
+        ]
+      },
+      "Malasana": {
+        "image": "assets/muladhara/2.png",
+        "steps": [
+          "Stand with your feet slightly wider than hip-width.",
+          "Squat down and bring your palms together in front of your chest.",
+          "Press your elbows against your inner knees and lengthen your spine.",
+          "Hold the position and breathe deeply."
+        ]
+      },
+      "Savasana": {
+        "image": "assets/muladhara/3.png",
+        "steps": [
+          "Lie flat on your back with legs comfortably apart.",
+          "Let your arms rest at your sides, palms facing up.",
+          "Close your eyes and relax all your muscles.",
+          "Focus on breathing deeply and slowly."
+        ]
+      },
+      "Tadasana": {
+        "image": "assets/muladhara/4.png",
+        "steps": [
+          "Stand tall with feet together and arms at your sides.",
+          "Distribute weight evenly on both feet.",
+          "Lift your chest and lengthen your spine.",
+          "Breathe steadily and hold the pose."
+        ]
+      },
+      "Virabhadrasana": {
+        "image": "assets/muladhara/5.png",
+        "steps": [
+          "Step one foot forward and bend the front knee.",
+          "Keep the back leg straight and heels grounded.",
+          "Raise your arms overhead with palms facing each other.",
+          "Hold the pose and breathe deeply."
+        ]
+      },
+      "Vrksasana": {
+        "image": "assets/muladhara/6.png",
+        "steps": [
+          "Stand tall with arms at your sides.",
+          "Shift weight to one leg and place the other foot on the inner thigh.",
+          "Bring your palms together in front of your chest.",
+          "Focus on a point and hold your balance while breathing."
+        ]
+      }
+    }
+  },
+  {
+    "name": "Swadhisthana Chakra",
+    "color": "Orange",
+    "element": "Water",
+    "location": "in the sacrum area",
+    "function": "reproductive health and creative energy",
+    "mantra": "Vam",
+    "image": "assets/images/Swadhisthana.png",
+    "yogasana": {
+      "Baddha Konasana": {
+        "image": "assets/swadhisthana/1.png",
+        "steps": [
+          "Sit on the floor with legs extended.",
+          "Bring the soles of your feet together and let your knees drop to the sides.",
+          "Hold your feet with your hands and lengthen your spine.",
+          "Breathe deeply and hold the position."
+        ]
+      },
+      "Garbha Pindasana": {
+        "image": "assets/swadhisthana/2.png",
+        "steps": [
+          "Sit on the floor with legs extended.",
+          "Cross your legs and thread your arms through them.",
+          "Hold your hands together and balance your body.",
+          "Keep your spine straight and breathe slowly."
+        ]
+      },
+      "Seated Forward Bend": {
+        "image": "assets/swadhisthana/3.png",
+        "steps": [
+          "Sit with legs extended in front of you.",
+          "Inhale and lengthen your spine.",
+          "Exhale and bend forward from the hips.",
+          "Reach for your feet or shins and hold."
+        ]
+      },
+      "Boat Pose": {
+        "image": "assets/swadhisthana/4.png",
+        "steps": [
+          "Sit on the floor with knees bent and feet on the floor.",
+          "Lift your feet off the floor and straighten your legs to form a 'V'.",
+          "Extend your arms forward parallel to the floor.",
+          "Hold the position while keeping your back straight."
+        ]
+      },
+      "Cat-Cow Pose": {
+        "image": "assets/swadhisthana/5.png",
+        "steps": [
+          "Start on hands and knees in a tabletop position.",
+          "Inhale, drop your belly, lift your head and tailbone (Cow Pose).",
+          "Exhale, round your spine and tuck your chin (Cat Pose).",
+          "Repeat for several breaths."
+        ]
+      },
+      "Bridge Pose": {
+        "image": "assets/swadhisthana/6.png",
+        "steps": [
+          "Lie on your back with knees bent and feet hip-width apart.",
+          "Press your feet and arms into the floor to lift your hips.",
+          "Keep your thighs and feet parallel.",
+          "Hold and breathe deeply."
+        ]
+      }
+    }
+  },
+  {
+    "name": "Manipura Chakra",
+    "color": "Yellow",
+    "element": "Fire",
+    "location": "in the stomach area",
+    "function": "digestive health, along with power and self-esteem",
+    "mantra": "Ram",
+    "image": "assets/images/Manipura.png",
+    "yogasana": {
+      "Boat Pose": {
+        "image": "assets/manipura/1.png",
+        "steps": [
+          "Sit on the floor with knees bent and feet flat.",
+          "Lift your feet off the floor and straighten your legs to form a 'V'.",
+          "Extend your arms forward parallel to the floor.",
+          "Hold the position while keeping your back straight."
+        ]
+      },
+      "Navasana": {
+        "image": "assets/manipura/2.png",
+        "steps": [
+          "Sit on the floor with legs extended.",
+          "Lift legs and torso to form a 'V' shape.",
+          "Extend arms forward.",
+          "Breathe steadily and hold."
+        ]
+      },
+      "Warrior Pose": {
+        "image": "assets/manipura/3.png",
+        "steps": [
+          "Step one foot forward, bend the knee, keep the other leg straight.",
+          "Raise your arms above your head, palms facing each other.",
+          "Look forward and breathe deeply.",
+          "Hold the position."
+        ]
+      },
+      "Bow Pose": {
+        "image": "assets/manipura/4.png",
+        "steps": [
+          "Lie on your stomach, bend your knees and hold your ankles.",
+          "Lift your chest and thighs off the floor.",
+          "Keep breathing steadily.",
+          "Hold the pose."
+        ]
+      },
+      "Plank Pose": {
+        "image": "assets/manipura/5.png",
+        "steps": [
+          "Start in push-up position.",
+          "Keep arms straight and body in a straight line from head to heels.",
+          "Engage your core and breathe steadily.",
+          "Hold as long as comfortable."
+        ]
+      },
+      "Cobra Pose": {
+        "image": "assets/manipura/6.png",
+        "steps": [
+          "Lie on your stomach, place hands under shoulders.",
+          "Press hands to lift chest off the floor.",
+          "Keep elbows slightly bent and shoulders relaxed.",
+          "Breathe and hold the pose."
+        ]
+      }
+    }
+  },
+  {
+    "name": "Anahata Chakra",
+    "color": "Green",
+    "element": "Air",
+    "location": "in the chest near the heart",
+    "function": "responsible for inner peace, love and devotion",
+    "mantra": "Yam",
+    "image": "assets/images/Anahata.png",
+    "yogasana": {
+      "Camel Pose": {
+        "image": "assets/anahata/1.png",
+        "steps": [
+          "Kneel on the floor with knees hip-width apart.",
+          "Place hands on your lower back for support.",
+          "Lean back, lifting the chest and head gently.",
+          "Hold and breathe deeply."
+        ]
+      },
+      "Bridge Pose": {
+        "image": "assets/anahata/2.png",
+        "steps": [
+          "Lie on your back with knees bent and feet hip-width apart.",
+          "Lift your hips and chest toward the ceiling.",
+          "Keep your thighs parallel and feet grounded.",
+          "Breathe steadily and hold."
+        ]
+      },
+      "Cobra Pose": {
+        "image": "assets/anahata/3.png",
+        "steps": [
+          "Lie on your stomach, hands under shoulders.",
+          "Lift chest off the floor while keeping elbows slightly bent.",
+          "Engage back muscles and breathe deeply.",
+          "Hold the pose."
+        ]
+      },
+      "Fish Pose": {
+        "image": "assets/anahata/4.png",
+        "steps": [
+          "Lie on your back with legs extended.",
+          "Place hands under hips and lift chest upward.",
+          "Rest the crown of your head on the floor.",
+          "Breathe deeply and hold."
+        ]
+      },
+      "Upward Facing Dog": {
+        "image": "assets/anahata/5.png",
+        "steps": [
+          "Lie on your stomach, hands under shoulders.",
+          "Press hands to lift torso and thighs off the floor.",
+          "Keep legs straight and tops of feet on the floor.",
+          "Hold and breathe steadily."
+        ]
+      },
+      "Cow Face Pose": {
+        "image": "assets/anahata/6.png",
+        "steps": [
+          "Sit on the floor with legs crossed or stacked.",
+          "Place one arm behind your back and the other over the shoulder.",
+          "Clasp hands if possible, lengthen spine and chest.",
+          "Breathe slowly and hold."
+        ]
+      }
+    }
+  },
+  {
+    "name": "Vishuddha Chakra",
+    "color": "Blue",
+    "element": "Space",
+    "location": "in the throat",
+    "function": "communication and self-expression",
+    "mantra": "Ham",
+    "image": "assets/images/Vishuddha.png",
+    "yogasana": {
+      "Plow Pose": {
+        "image": "assets/vishuddha/1.png",
+        "steps": [
+          "Lie on your back with arms at sides.",
+          "Lift legs and hips over your head.",
+          "Try to touch toes to the floor behind you.",
+          "Keep neck relaxed and breathe steadily."
+        ]
+      },
+      "Shoulder Stand": {
+        "image": "assets/vishuddha/2.png",
+        "steps": [
+          "Lie on your back and lift legs overhead.",
+          "Support your lower back with hands.",
+          "Keep legs straight and spine aligned.",
+          "Breathe steadily and hold the pose."
+        ]
+      },
+      "Fish Pose": {
+        "image": "assets/vishuddha/3.png",
+        "steps": [
+          "Lie on your back with legs extended.",
+          "Place hands under hips for support.",
+          "Lift chest upward and rest crown of the head on the floor.",
+          "Breathe deeply and hold."
+        ]
+      },
+      "Lion Pose": {
+        "image": "assets/vishuddha/4.png",
+        "steps": [
+          "Kneel or sit comfortably.",
+          "Inhale deeply through the nose.",
+          "Exhale forcefully through the mouth while sticking out your tongue and opening eyes wide.",
+          "Repeat for several breaths."
+        ]
+      },
+      "Bridge Pose": {
+        "image": "assets/vishuddha/5.png",
+        "steps": [
+          "Lie on your back with knees bent, feet hip-width apart.",
+          "Press feet and arms into floor to lift hips.",
+          "Keep thighs parallel and chest lifted.",
+          "Breathe deeply and hold."
+        ]
+      },
+      "Cat Pose": {
+        "image": "assets/vishuddha/6.png",
+        "steps": [
+          "Start on hands and knees in a tabletop position.",
+          "Exhale, round your spine, tucking chin to chest (Cat Pose).",
+          "Inhale, arch your back, lifting head and tailbone (Cow Pose).",
+          "Repeat for several breaths."
+        ]
+      }
+    }
+  },
+  {
+    "name": "Ajna Chakra",
+    "color": "Indigo",
+    "element": "none",
+    "location": "between the eyebrows",
+    "function": "intuition and imagination",
+    "mantra": "Aum",
+    "image": "assets/images/Ajna.png",
+    "yogasana": {
+      "Child Pose": {
+        "image": "assets/ajna/1.png",
+        "steps": [
+          "Kneel on the floor with big toes touching and knees apart.",
+          "Sit back on your heels and stretch arms forward on the floor.",
+          "Rest forehead on the ground and relax your body.",
+          "Breathe deeply and hold for several breaths."
+        ]
+      },
+      "Downward Dog": {
+        "image": "assets/ajna/2.png",
+        "steps": [
+          "Start on hands and knees.",
+          "Lift hips towards the ceiling forming an inverted 'V'.",
+          "Press heels toward the floor and lengthen your spine.",
+          "Breathe steadily and hold."
+        ]
+      },
+      "Easy Pose": {
+        "image": "assets/ajna/3.png",
+        "steps": [
+          "Sit cross-legged on the floor with a straight spine.",
+          "Rest hands on knees, palms up or down.",
+          "Relax shoulders and close eyes.",
+          "Focus on breathing and meditation."
+        ]
+      },
+      "Seated Forward Fold": {
+        "image": "assets/ajna/4.png",
+        "steps": [
+          "Sit with legs extended.",
+          "Inhale, lengthen the spine.",
+          "Exhale, bend forward from hips and reach for feet.",
+          "Hold and breathe deeply."
+        ]
+      },
+      "Plow Pose": {
+        "image": "assets/ajna/5.png",
+        "steps": [
+          "Lie on your back with arms at sides.",
+          "Lift legs and hips, bringing feet over your head.",
+          "Try to touch toes to the floor behind you.",
+          "Keep neck relaxed and breathe steadily."
+        ]
+      },
+      "Corpse Pose": {
+        "image": "assets/ajna/6.png",
+        "steps": [
+          "Lie flat on your back with arms at sides.",
+          "Keep legs apart comfortably and palms facing up.",
+          "Close eyes and relax every muscle.",
+          "Breathe naturally and hold for several minutes."
+        ]
+      }
+    }
+  },
+  {
+    "name": "Sahasrara Chakra",
+    "color": "Violet",
+    "element": "none",
+    "location": "at the top of the head",
+    "function": "spiritual connection and enlightenment",
+    "mantra": "Aum",
+    "image": "assets/images/Sahasrara.png",
+    "yogasana": {
+      "Headstand": {
+        "image": "assets/sahasrara/1.png",
+        "steps": [
+          "Kneel on the floor and place forearms on the ground, fingers interlaced.",
+          "Place crown of head on floor cradled by hands.",
+          "Lift legs off floor slowly and straighten upwards.",
+          "Engage core and balance while breathing steadily."
+        ]
+      },
+      "Corpse Pose": {
+        "image": "assets/sahasrara/2.png",
+        "steps": [
+          "Lie flat on your back with arms at sides.",
+          "Keep legs comfortably apart and palms facing up.",
+          "Close eyes and relax every muscle.",
+          "Breathe naturally and hold for several minutes."
+        ]
+      },
+      "Lotus Pose": {
+        "image": "assets/sahasrara/3.png",
+        "steps": [
+          "Sit on the floor, cross legs with feet on opposite thighs.",
+          "Rest hands on knees in a mudra.",
+          "Keep spine straight and shoulders relaxed.",
+          "Breathe steadily and meditate."
+        ]
+      },
+      "Child Pose": {
+        "image": "assets/sahasrara/4.png",
+        "steps": [
+          "Kneel on the floor with big toes touching and knees apart.",
+          "Sit back on heels and stretch arms forward.",
+          "Rest forehead on floor and relax body.",
+          "Breathe deeply and hold."
+        ]
+      },
+      "Tree Pose": {
+        "image": "assets/sahasrara/5.png",
+        "steps": [
+          "Stand tall with arms at sides.",
+          "Shift weight to one leg, place other foot on inner thigh or calf.",
+          "Bring palms together in front of chest.",
+          "Focus on a point and hold balance while breathing."
+        ]
+      },
+      "Seated Meditation": {
+        "image": "assets/sahasrara/6.png",
+        "steps": [
+          "Sit cross-legged with straight spine.",
+          "Rest hands on knees, palms up or down.",
+          "Close eyes and focus on breath.",
+          "Meditate for several minutes, staying relaxed."
+        ]
+      }
+    }
+  }
+]

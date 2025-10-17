@@ -186,7 +186,13 @@ class _BalanceMenuState extends State<BalanceMenu> {
                         controller: _pageController,
                         itemCount: widget.yogasana.length,
                         onPageChanged: (index) {
-                          _flutterTts.speak("The next sixty seconds ${keys[index]}");
+                          final yogasanaItem = widget.yogasana[keys[index]] as Map<String, dynamic>?;
+                          final List<dynamic> steps = yogasanaItem?['steps'] as List<dynamic>? ?? [];
+                          String text = "The next sixty seconds ${keys[index]}. ";
+                          for (dynamic step in steps) {
+                            text += "$step. ";
+                          }
+                          _flutterTts.speak(text);
                           setState(() {
                             _currentPage = index;
                           });
