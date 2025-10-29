@@ -1,40 +1,100 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+enum TimerPhase { initial, running, ending }
+
 class CountdownTimer extends StatefulWidget {
   final VoidCallback nextPage;
   final VoidCallback prevPage;
   final Color color;
-  const CountdownTimer({super.key, required this.nextPage, required this.prevPage, required this.color});
+  final int maxSeconds;
+  final VoidCallback? onTimerEnd;
+  final VoidCallback? onHalfTime;
+  final VoidCallback? onPhaseEnd;
+  final VoidCallback? onInitialCountdown;
+  const CountdownTimer({super.key, required this.nextPage, required this.prevPage, required this.color, required this.maxSeconds, this.onTimerEnd, this.onHalfTime, this.onPhaseEnd, this.onInitialCountdown});
 
   @override
   State<CountdownTimer> createState() => _CountdownTimerState();
 }
 
 class _CountdownTimerState extends State<CountdownTimer> {
-  static const maxseconds = 59;
-  int seconds = maxseconds;
+  late int seconds;
   bool isRunning = false;
   Timer? timer;
+  TimerPhase currentPhase = TimerPhase.initial;
+  bool hasSpokenHalfTime = false;
+
+  @override
+  void initState() {
+    super.initState();
+    seconds = 3;
+    startInitialCountdown();
+  }
+
+  void startInitialCountdown() {
+    currentPhase = TimerPhase.initial;
+    widget.onInitialCountdown?.call();
+    timer = Timer.periodic(Duration(seconds: 1), (t) {
+      if (mounted) {
+        setState(() {
+          if (seconds > 0) {
+            seconds--;
+          } else {
+            t.cancel();
+            startTimer();
+          }
+        });
+      }
+    });
+  }
 
   void startTimer() {
+    currentPhase = TimerPhase.running;
+    seconds = widget.maxSeconds;
+    hasSpokenHalfTime = false;
     timer?.cancel();
     timer = Timer.periodic(Duration(seconds: 1), (_) {
-      setState(() {
-        if(seconds ==0){
-          widget.nextPage();
-          resetTimer();
-        }
-        if (seconds > 0) {
-          seconds--;
-        } else {
-          timer?.cancel();
-          isRunning = false;
-        }
-      });
+      if (mounted) {
+        setState(() {
+          if (seconds > 3) {
+            seconds--;
+            if (seconds == widget.maxSeconds ~/ 2 && !hasSpokenHalfTime) {
+              hasSpokenHalfTime = true;
+              widget.onHalfTime?.call();
+            }
+          } else if (seconds > 0) {
+            seconds--;
+            if (seconds == 0) {
+              _startEndingCountdown();
+            }
+          }
+        });
+      }
     });
     setState(() {
       isRunning = true;
+    });
+  }
+
+  void _startEndingCountdown() {
+    currentPhase = TimerPhase.ending;
+    timer?.cancel();
+    seconds = 3;
+    widget.onPhaseEnd?.call();
+    timer = Timer.periodic(Duration(milliseconds: 100), (t) {
+      if (mounted) {
+        setState(() {
+          if (seconds > 0) {
+            seconds--;
+          } else {
+            t.cancel();
+            widget.onTimerEnd?.call();
+            widget.nextPage();
+            resetTimer();
+          }
+        });
+      }
     });
   }
 
@@ -48,8 +108,9 @@ class _CountdownTimerState extends State<CountdownTimer> {
   void resetTimer() {
     timer?.cancel();
     setState(() {
-      seconds = maxseconds;
+      seconds = widget.maxSeconds;
       isRunning = false;
+      currentPhase = TimerPhase.running;
     });
   }
 
@@ -63,7 +124,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
   Widget build(BuildContext context) {
     double fullWidth = 320;
     double height = 80;
-    double progress = 1 - (seconds / maxseconds);
+    double progress = 1 - (seconds / widget.maxSeconds);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -71,7 +132,11 @@ class _CountdownTimerState extends State<CountdownTimer> {
       children: [
         Center(
           child: Text(
-            seconds < 10 ? "00:0$seconds" : "00:$seconds",
+            (currentPhase == TimerPhase.initial || currentPhase == TimerPhase.ending) ? seconds.toString() : () {
+              int minutes = seconds ~/ 60;
+              int secs = seconds % 60;
+              return "${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}";
+            }(),
             style: TextStyle(fontSize: 70, fontWeight: FontWeight.w600),
           ),
         ),

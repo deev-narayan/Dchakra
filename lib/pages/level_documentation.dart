@@ -45,7 +45,28 @@ class LevelDocumentation extends StatelessWidget {
                         ),
                       ),
                     ),
+                    botmNavBar(),
                     Positioned(
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(0, 85, 0, 71),
+                        height: double.infinity,
+                        width: double.infinity,
+                        child: Center(child: ContainList()),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+botmNavBar() {
+  return Positioned(
                       bottom: 0,
                       left: 0,
                       right: 0,
@@ -87,22 +108,5 @@ class LevelDocumentation extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      child: Container(
-                        margin: EdgeInsets.fromLTRB(0, 85, 0, 71),
-                        height: double.infinity,
-                        width: double.infinity,
-                        child: Center(child: ContainList()),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+                    );
 }

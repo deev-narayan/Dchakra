@@ -30,7 +30,7 @@ class WelcomePage extends StatelessWidget {
           right: 0,
           child: Center(
             child: BtnTheme(
-              text: "Login with Google",
+              text: "Continue",
               color: Color.fromARGB(52, 248, 223, 140),
               child: Documentation(),
             ),

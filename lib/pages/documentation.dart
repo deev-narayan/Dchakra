@@ -30,7 +30,7 @@ class Documentation extends StatelessWidget {
                 child: Center(
                   child: SequentialFadeDemo(
                     onDone: () {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) {
                             return LevelDocumentation();
@@ -42,6 +42,11 @@ class Documentation extends StatelessWidget {
                 ),
               ),
             ),
+            Positioned(bottom: 40,left: 120,right: 120,child: IconButton.outlined(onPressed: (){
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (builder){
+                return LevelDocumentation();
+              }));
+            }, icon: Icon(Icons.arrow_forward_rounded)))
           ],
         ),
       ),

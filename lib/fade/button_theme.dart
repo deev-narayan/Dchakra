@@ -40,7 +40,7 @@ class BtnTheme extends StatelessWidget {
         ),
         child: Container(
           height: 50,
-          width: 180,
+          width: 130,
           alignment: Alignment.center,
           child: Text(
             text,

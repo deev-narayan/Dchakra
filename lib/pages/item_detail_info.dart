@@ -1,6 +1,8 @@
 import 'package:dchakra/fade/button_theme.dart';
 import 'package:dchakra/icons/logo.dart';
+import 'package:dchakra/pages/level_documentation.dart';
 import 'package:dchakra/pages/yoga&meditaton/balance_menu.dart';
+import 'package:dchakra/pages/yoga&meditaton/mantra_chant.dart';
 import 'package:flutter/material.dart';
 
 Color getChakraColor(String colorName) {
@@ -152,17 +154,30 @@ class ItemDetailInfo extends StatelessWidget {
               ],
             ),
             Positioned(
-              bottom: 15,
+              bottom: 90,
               left: 0,
               right: 0,
-              child: Center(
-                child: BtnTheme(
-                  text: "Balance It",
-                  color: getChakraColor(color),
-                  child: BalanceMenu(yogasana: yogasana,name: name,color: color,),
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Center(
+                    child: BtnTheme(
+                      text: "Yogasana",
+                      color: getChakraColor(color),
+                      child: BalanceMenu(yogasana: yogasana,name: name,color: color,),
+                    ),
+                  ),
+                  Center(
+                    child: BtnTheme(
+                      text: "Meditate",
+                      color: getChakraColor(color),
+                      child: MantraChant(chakraName: name,getClr: getChakraColor(color),),
+                    ),
+                  ),
+                ],
               ),
             ),
+            botmNavBar()
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:dchakra/icons/logo.dart';
 import 'package:dchakra/pages/item_detail_info.dart';
+import 'package:dchakra/pages/level_documentation.dart';
 import 'package:dchakra/pages/yoga&meditaton/timer_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -26,14 +27,17 @@ class _BalanceMenuState extends State<BalanceMenu> {
   final FlutterTts _flutterTts = FlutterTts();
   Map? _currentVoice;
 
+
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
-    initTTS();
+    initTTS().then((_) {
+      _speakCurrentPage();
+    });
   }
 
-  void initTTS() async {
+  Future<void> initTTS() async {
     try {
       var data = await _flutterTts.getVoices;
       List<Map> voices = List<Map>.from(data);
@@ -48,6 +52,17 @@ class _BalanceMenuState extends State<BalanceMenu> {
     }
   }
 
+  void _speakCurrentPage() {
+    List<String> keys = widget.yogasana.keys.toList();
+    final yogasanaItem = widget.yogasana[keys[_currentPage]] as Map<String, dynamic>?;
+    final List<dynamic> steps = yogasanaItem?['steps'] as List<dynamic>? ?? [];
+    String text = "3, 2, 1, start. The next sixty seconds ${keys[_currentPage]}. ";
+    for (dynamic step in steps) {
+      text += "$step. ";
+    }
+    _flutterTts.speak(text);
+  }
+
   void setVoice(Map voice) {
     _flutterTts.setVoice({
       "name": voice["name"],
@@ -57,6 +72,7 @@ class _BalanceMenuState extends State<BalanceMenu> {
 
   @override
   void dispose() {
+    _flutterTts.stop();
     _pageController.dispose();
     super.dispose();
   }
@@ -68,7 +84,27 @@ class _BalanceMenuState extends State<BalanceMenu> {
         duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
+      setState(() {
+        _currentPage++;
+      });
+      _speakCurrentPage();
     }
+  }
+
+  void _onTimerEnd() {
+    _flutterTts.speak("3, 2, 1, stop");
+  }
+
+  void _onInitialCountdown() {
+    _flutterTts.speak("3, 2, 1, start");
+  }
+
+  void _onHalfTime() {
+    _flutterTts.speak("Half time");
+  }
+
+  void _onPhaseEnd() {
+    _flutterTts.speak("3, 2, 1, stop");
   }
 
   void _prevPage() {
@@ -126,7 +162,9 @@ class _BalanceMenuState extends State<BalanceMenu> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    
+                                  },
                                   icon: Icon(Icons.home_rounded),
                                 ),
                                 IconButton(
@@ -249,7 +287,8 @@ class _BalanceMenuState extends State<BalanceMenu> {
                 ],
               ),
             ),
-            Positioned(left: 0, right: 0, bottom: 85, child: CountdownTimer(nextPage: _nextPage, prevPage: _prevPage, color: getChakraColor(widget.color))),
+            Positioned(left: 0, right: 0, bottom: 85, child: CountdownTimer(nextPage: _nextPage, prevPage: _prevPage, color: getChakraColor(widget.color), maxSeconds: 59, onTimerEnd: _onTimerEnd, onHalfTime: _onHalfTime, onPhaseEnd: _onPhaseEnd, onInitialCountdown: _onInitialCountdown)),
+            botmNavBar()
           ],
         ),
       ),
