@@ -1,14 +1,15 @@
 import 'package:dchakra/icons/logo.dart';
 import 'package:dchakra/pages/item_detail_info.dart';
-import 'package:dchakra/pages/level_documentation.dart';
 import 'package:dchakra/pages/yoga&meditaton/timer_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
+enum SessionPhase { pose, rest }
+
 class BalanceMenu extends StatefulWidget {
   final String name;
   final String color;
-  final Map<String, dynamic> yogasana;  // Updated to Map<String, dynamic>
+  final Map<String, dynamic> yogasana;
 
   const BalanceMenu({
     super.key,
@@ -18,57 +19,120 @@ class BalanceMenu extends StatefulWidget {
   });
 
   @override
-  _BalanceMenuState createState() => _BalanceMenuState();
+  State<BalanceMenu> createState() => _BalanceMenuState();
 }
 
 class _BalanceMenuState extends State<BalanceMenu> {
   late PageController _pageController;
-  int _currentPage = 0;
   final FlutterTts _flutterTts = FlutterTts();
-  Map? _currentVoice;
 
+  int _currentPage = 0;
+  SessionPhase _phase = SessionPhase.pose;
+  bool _sessionRunning = false;
+
+  static const int poseDuration = 60;
+  static const int restDuration = 15;
+
+  // ---------------- INIT ----------------
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
-    initTTS().then((_) {
-      _speakCurrentPage();
-    });
+
+    _flutterTts.setCompletionHandler(() {});
+
+    initTTS().then((_) => startYogaSession());
   }
 
   Future<void> initTTS() async {
-    try {
-      var data = await _flutterTts.getVoices;
-      List<Map> voices = List<Map>.from(data);
-      voices = voices.where((v) => v["name"].toString().contains("en")).toList();
-
-      if (voices.isNotEmpty) {
-        _currentVoice = voices.first;
-        setVoice(_currentVoice!);
-      }
-    } catch (e) {
-      // Handle error silently or log it
-    }
+    await _flutterTts.setLanguage("en-US");
+    await _flutterTts.setSpeechRate(0.45);
   }
 
-  void _speakCurrentPage() {
-    List<String> keys = widget.yogasana.keys.toList();
-    final yogasanaItem = widget.yogasana[keys[_currentPage]] as Map<String, dynamic>?;
-    final List<dynamic> steps = yogasanaItem?['steps'] as List<dynamic>? ?? [];
-    String text = "3, 2, 1, start. The next sixty seconds ${keys[_currentPage]}. ";
-    for (dynamic step in steps) {
+  // ---------------- SPEECH ----------------
+
+  void _speakPose() {
+    final keys = widget.yogasana.keys.toList();
+    final item =
+        widget.yogasana[keys[_currentPage]] as Map<String, dynamic>?;
+
+    final steps = item?['steps'] ?? [];
+
+    String text =
+        "3, 2, 1, start. The next $poseDuration seconds ${keys[_currentPage]}. ";
+
+    for (final step in steps) {
       text += "$step. ";
     }
+
     _flutterTts.speak(text);
   }
 
-  void setVoice(Map voice) {
-    _flutterTts.setVoice({
-      "name": voice["name"],
-      "locale": voice["locale"],
-    });
+  void _speakRest() {
+    _flutterTts.speak("Take a rest");
   }
+
+  // ---------------- TIMER EVENTS ----------------
+
+  void _onInitialCountdown() {
+    if (_phase == SessionPhase.pose) {
+      _speakPose();
+    } else {
+      _speakRest();
+    }
+  }
+
+  void _onHalfTime() {
+    _flutterTts.speak("Half time");
+  }
+
+  void _onTimerEnd() {
+    if (_phase == SessionPhase.pose) {
+      _flutterTts.speak("3, 2, 1, stop");
+
+      setState(() {
+        _phase = SessionPhase.rest;
+      });
+    } else {
+      _goToNextPose();
+    }
+  }
+
+  // ---------------- FLOW CONTROL ----------------
+
+  void _goToNextPose() async {
+    if (_currentPage >= widget.yogasana.length - 1) {
+      _flutterTts.speak("Session complete. Well done.");
+      _sessionRunning = false;
+      return;
+    }
+
+    setState(() {
+      _currentPage++;
+      _phase = SessionPhase.pose;
+    });
+
+    await _pageController.animateToPage(
+      _currentPage,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void startYogaSession() {
+    if (_sessionRunning) return;
+
+    setState(() {
+      _sessionRunning = true;
+      _currentPage = 0;
+      _phase = SessionPhase.pose;
+    });
+
+    _pageController.jumpToPage(0);
+  }
+
+  // ---------------- DISPOSE ----------------
 
   @override
   void dispose() {
@@ -77,52 +141,14 @@ class _BalanceMenuState extends State<BalanceMenu> {
     super.dispose();
   }
 
-  void _nextPage() {
-    if (_currentPage < widget.yogasana.length - 1) {
-      _pageController.animateToPage(
-        _currentPage + 1,
-        duration: Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-      setState(() {
-        _currentPage++;
-      });
-      _speakCurrentPage();
-    }
-  }
-
-  void _onTimerEnd() {
-    _flutterTts.speak("3, 2, 1, stop");
-  }
-
-  void _onInitialCountdown() {
-    _flutterTts.speak("3, 2, 1, start");
-  }
-
-  void _onHalfTime() {
-    _flutterTts.speak("Half time");
-  }
-
-  void _onPhaseEnd() {
-    _flutterTts.speak("3, 2, 1, stop");
-  }
-
-  void _prevPage() {
-    if (_currentPage > 0) {
-      _pageController.animateToPage(
-        _currentPage - 1,
-        duration: Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
+  // ---------------- UI ----------------
 
   @override
   Widget build(BuildContext context) {
-    List<String> keys = widget.yogasana.keys.toList();  // List of yogasana names
+    final keys = widget.yogasana.keys.toList();
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: SafeArea(
         child: Stack(
           children: [
@@ -131,84 +157,28 @@ class _BalanceMenuState extends State<BalanceMenu> {
               height: 650,
               width: 650,
               left: -320,
-              child: Opacity(opacity: 0.1, child: SizedBox(child: AppLogo())),
+              child: Opacity(opacity: 0.1, child: AppLogo()),
             ),
-            Center(child: LinrGrage()),  // Assuming this is a custom widget
-            Center(
-              child: GlassEffect(
-                width: double.infinity,
-                height: double.infinity,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        height: 70,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          border: BorderDirectional(
-                            top: BorderSide(
-                              width: 1,
-                              color: const Color.fromARGB(21, 255, 255, 255),
-                            ),
-                          ),
-                        ),
-                        child: Container(
-                          margin: const EdgeInsets.all(10.0),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    
-                                  },
-                                  icon: Icon(Icons.home_rounded),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.calendar_month_rounded),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.settings),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.person),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+
             Positioned(
               top: 0,
               left: 10,
               right: 10,
               height: 40,
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  BackButton(color: Colors.white),
+                  const BackButton(color: Colors.white),
                   Text(
                     widget.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white),
                   ),
                 ],
               ),
             ),
+
             Positioned(
               top: 40,
               left: 0,
@@ -218,77 +188,71 @@ class _BalanceMenuState extends State<BalanceMenu> {
                 children: [
                   SizedBox(
                     height: 440,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: PageView.builder(
-                        controller: _pageController,
-                        itemCount: widget.yogasana.length,
-                        onPageChanged: (index) {
-                          final yogasanaItem = widget.yogasana[keys[index]] as Map<String, dynamic>?;
-                          final List<dynamic> steps = yogasanaItem?['steps'] as List<dynamic>? ?? [];
-                          String text = "The next sixty seconds ${keys[index]}. ";
-                          for (dynamic step in steps) {
-                            text += "$step. ";
-                          }
-                          _flutterTts.speak(text);
-                          setState(() {
-                            _currentPage = index;
-                          });
-                        },
-                        itemBuilder: (context, index) {
-                          final yogasanaItem = widget.yogasana[keys[index]] as Map<String, dynamic>?;  // Get the inner map
-                          final imagePath = yogasanaItem?['image'] as String? ?? 'assets/placeholder.png';  // Safely get the image path
-                          
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.all(10.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(18),
-                                  color: const Color.fromARGB(255, 255, 255, 255),
-                                ),
-                                child: Image.asset(
-                                  imagePath,  // Now uses the correct image path
-                                  height: 340,
-                                  fit: BoxFit.contain,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Icon(
-                                      Icons.broken_image,
-                                      size: 200,
-                                      color: Colors.red,
-                                    );
-                                  },
-                                ),
+                    child: PageView.builder(
+                      controller: _pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: widget.yogasana.length,
+                      itemBuilder: (context, index) {
+                        final item =
+                            widget.yogasana[keys[index]] as Map<String, dynamic>?;
+                        final imagePath =
+                            item?['image'] ?? 'assets/placeholder.png';
+
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(18),
+                                color: const Color.fromARGB(228, 255, 255, 255),
                               ),
-                              SizedBox(height: 8),
-                              Text(
-                                keys[index],
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
+                              child: Image.asset(
+                                imagePath,
+                                height: 340,
                               ),
-                            ],
-                          );
-                        },
-                      ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              keys[index],
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 16),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              _phase == SessionPhase.pose
+                                  ? "Hold Pose"
+                                  : "Rest",
+                              style: const TextStyle(
+                                  color: Colors.grey, fontSize: 14),
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '${_currentPage + 1} / ${widget.yogasana.length}',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  )
                 ],
               ),
             ),
-            Positioned(left: 0, right: 0, bottom: 85, child: CountdownTimer(nextPage: _nextPage, prevPage: _prevPage, color: getChakraColor(widget.color), maxSeconds: 59, onTimerEnd: _onTimerEnd, onHalfTime: _onHalfTime, onPhaseEnd: _onPhaseEnd, onInitialCountdown: _onInitialCountdown)),
-            botmNavBar()
+
+            ///  TIMER CONTROLS EVERYTHING
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 85,
+              child: CountdownTimer(
+                key: ValueKey("$_currentPage-$_phase"),
+                maxSeconds:
+                    _phase == SessionPhase.pose ? poseDuration : restDuration,
+                color: getChakraColor(widget.color),
+                nextPage: () {},
+                prevPage: () {},
+                onTimerEnd: _onTimerEnd,
+                onHalfTime: _onHalfTime,
+                onInitialCountdown: _onInitialCountdown,
+                onPhaseEnd: () {},
+              ),
+            ),
           ],
         ),
       ),
