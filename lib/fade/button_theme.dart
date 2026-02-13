@@ -4,12 +4,16 @@ class BtnTheme extends StatelessWidget {
   final Widget child;
   final String text;
   final Color color;
-  const BtnTheme({super.key, required this.child, required this.text, required this.color});
+  const BtnTheme(
+      {super.key,
+      required this.child,
+      required this.text,
+      required this.color});
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () {
+    return GestureDetector(
+      onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) {
@@ -18,38 +22,35 @@ class BtnTheme extends StatelessWidget {
           ),
         );
       },
-      style: OutlinedButton.styleFrom(
-        padding: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-        side: BorderSide(
-          color: color,
-          width: 1,
-        ),
-      ),
-      child: Ink(
+      child: Container(
+        height: 50,
+        width: 130,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              color,
-              const Color.fromARGB(66, 0, 0, 0),
+              color.withOpacity(0.8),
+              color.withOpacity(0.4),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(25),
+          border: Border.all(color: color, width: 1),
+          boxShadow: [
+            BoxShadow(
+              color: color.withOpacity(0.3),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            )
+          ],
         ),
-        child: Container(
-          height: 50,
-          width: 130,
-          alignment: Alignment.center,
-          child: Text(
-            text,
-            style: const TextStyle(
-              color: Color.fromARGB(190, 255, 255, 255),
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-            ),
-          ),
+        alignment: Alignment.center,
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.white, // Keep white for contrast on gradient
+                fontWeight: FontWeight.w600,
+              ),
         ),
       ),
     );

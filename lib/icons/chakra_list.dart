@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'package:dchakra/pages/item_detail_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'dart:developer' as developer;  // For logging errors
+import 'package:dchakra/icons/logo.dart';
+import 'dart:developer' as developer;
 
 String jsonPath = "assets/data/list_chakra_details.json";
 
@@ -30,7 +31,7 @@ class _ContainListState extends State<ContainList> {
         chakraData = data;
       });
     } catch (e) {
-      developer.log('Error loading JSON: $e');  // Log any errors
+      developer.log('Error loading JSON: $e'); // Log any errors
     }
   }
 
@@ -42,8 +43,10 @@ class _ContainListState extends State<ContainList> {
 
     return ListView(
       children: chakraData.map((item) {
-        Map<String, Map<String, dynamic>> yogasanaMap = {};  // Default empty map
-        if (item['yogasana'] != null && item['yogasana'] is Map<String, dynamic>) {
+        Map<String, Map<String, dynamic>> yogasanaMap =
+            {}; // Default empty map
+        if (item['yogasana'] != null &&
+            item['yogasana'] is Map<String, dynamic>) {
           try {
             Map<String, dynamic> rawYogasana = item['yogasana'];
             yogasanaMap = rawYogasana.cast<String, Map<String, dynamic>>();
@@ -60,7 +63,7 @@ class _ContainListState extends State<ContainList> {
           location: item['location'] as String? ?? '',
           function: item['function'] as String? ?? '',
           mantra: item['mantra'] as String? ?? '',
-          yogasana: yogasanaMap,  // Now safely passed
+          yogasana: yogasanaMap, // Now safely passed
         );
       }).toList(),
     );
@@ -91,32 +94,16 @@ class ChakraList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.transparent,
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              const Color.fromARGB(0, 248, 223, 140),
-              const Color.fromARGB(83, 0, 0, 0),
-            ],
-            end: Alignment.topLeft,
-            begin: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(45),
-          border: Border.all(width: 1, color: getChakraColor(color)),  // Ensure this function exists
-        ),
-        child: TextButton(
-          style: TextButton.styleFrom(
-            padding: const EdgeInsets.all(12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(45),
-            ),
-          ),
-          onPressed: () {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      child: GlassEffect(
+        radius: 20,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(20),
+          onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
@@ -134,32 +121,81 @@ class ChakraList extends StatelessWidget {
               ),
             );
           },
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(35),
-                child: Hero(
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                  width: 1,
+                  color: getChakraColor(color).withValues(alpha: 0.5)),
+              gradient: LinearGradient(
+                colors: isDark
+                    ? [
+                        getChakraColor(color).withValues(alpha: 0.1),
+                        Colors.black.withValues(alpha: 0.2),
+                      ]
+                    : [
+                        getChakraColor(color).withValues(alpha: 0.1),
+                        Colors.white.withValues(alpha: 0.5),
+                      ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Row(
+              children: [
+                Hero(
                   tag: name,
-                  child: Image.asset(
-                    image,
-                    height: 50,
-                    width: 50,
-                    fit: BoxFit.cover,
+                  child: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: getChakraColor(color)
+                              .withValues(alpha: 0.6),
+                          blurRadius: 15,
+                          spreadRadius: 2,
+                        )
+                      ],
+                    ),
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: theme.scaffoldBackgroundColor,
+                      backgroundImage: AssetImage(image),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Text(
-                  name,
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 18,
+                const SizedBox(width: 20),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        name,
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        "Element: $element",
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.textTheme.bodyMedium?.color
+                              ?.withOpacity(0.7),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: theme.iconTheme.color?.withOpacity(0.5),
+                  size: 18,
+                ),
+              ],
+            ),
           ),
         ),
       ),

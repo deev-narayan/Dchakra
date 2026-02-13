@@ -12,7 +12,16 @@ class CountdownTimer extends StatefulWidget {
   final VoidCallback? onHalfTime;
   final VoidCallback? onPhaseEnd;
   final VoidCallback? onInitialCountdown;
-  const CountdownTimer({super.key, required this.nextPage, required this.prevPage, required this.color, required this.maxSeconds, this.onTimerEnd, this.onHalfTime, this.onPhaseEnd, this.onInitialCountdown});
+  const CountdownTimer(
+      {super.key,
+      required this.nextPage,
+      required this.prevPage,
+      required this.color,
+      required this.maxSeconds,
+      this.onTimerEnd,
+      this.onHalfTime,
+      this.onPhaseEnd,
+      this.onInitialCountdown});
 
   @override
   State<CountdownTimer> createState() => _CountdownTimerState();
@@ -35,7 +44,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
   void startInitialCountdown() {
     currentPhase = TimerPhase.initial;
     widget.onInitialCountdown?.call();
-    timer = Timer.periodic(Duration(seconds: 1), (t) {
+    timer = Timer.periodic(const Duration(seconds: 1), (t) {
       if (mounted) {
         setState(() {
           if (seconds > 0) {
@@ -54,7 +63,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
     seconds = widget.maxSeconds;
     hasSpokenHalfTime = false;
     timer?.cancel();
-    timer = Timer.periodic(Duration(seconds: 1), (_) {
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (mounted) {
         setState(() {
           if (seconds > 3) {
@@ -82,7 +91,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
     timer?.cancel();
     seconds = 3;
     widget.onPhaseEnd?.call();
-    timer = Timer.periodic(Duration(milliseconds: 100), (t) {
+    timer = Timer.periodic(const Duration(milliseconds: 100), (t) {
       if (mounted) {
         setState(() {
           if (seconds > 0) {
@@ -90,7 +99,6 @@ class _CountdownTimerState extends State<CountdownTimer> {
           } else {
             t.cancel();
             widget.onTimerEnd?.call();
-            widget.nextPage();
             resetTimer();
           }
         });
@@ -125,6 +133,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
     double fullWidth = 320;
     double height = 80;
     double progress = 1 - (seconds / widget.maxSeconds);
+    final theme = Theme.of(context);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -132,15 +141,21 @@ class _CountdownTimerState extends State<CountdownTimer> {
       children: [
         Center(
           child: Text(
-            (currentPhase == TimerPhase.initial || currentPhase == TimerPhase.ending) ? seconds.toString() : () {
-              int minutes = seconds ~/ 60;
-              int secs = seconds % 60;
-              return "${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}";
-            }(),
-            style: TextStyle(fontSize: 70, fontWeight: FontWeight.w600),
+            (currentPhase == TimerPhase.initial ||
+                    currentPhase == TimerPhase.ending)
+                ? seconds.toString()
+                : () {
+                    int minutes = seconds ~/ 60;
+                    int secs = seconds % 60;
+                    return "${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}";
+                  }(),
+            style: theme.textTheme.displayMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: theme.colorScheme.onBackground,
+            ),
           ),
         ),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         Container(
           color: Colors.transparent,
           child: ClipRRect(
@@ -151,7 +166,10 @@ class _CountdownTimerState extends State<CountdownTimer> {
                 Container(
                   width: fullWidth,
                   height: height,
-                  color: const Color.fromARGB(14, 255, 255, 255),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surfaceVariant.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
                 ),
                 // Progress bar inside container (width only!)
                 Positioned(
@@ -163,9 +181,9 @@ class _CountdownTimerState extends State<CountdownTimer> {
                     width: fullWidth * progress,
                     height: height,
                     decoration: BoxDecoration(
-                      color: widget.color,
+                      color: widget.color.withOpacity(0.8),
                       borderRadius: BorderRadius.horizontal(
-                        left: Radius.circular(25),
+                        left: const Radius.circular(25),
                         right: Radius.circular(progress == 1 ? 25 : 2),
                       ),
                     ),
@@ -179,15 +197,17 @@ class _CountdownTimerState extends State<CountdownTimer> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       IconButton(
-                        icon: Icon(Icons.arrow_back_ios, color: const Color.fromARGB(255, 255, 255, 255)),
-                        onPressed: (){
+                        icon: Icon(Icons.arrow_back_ios,
+                            color: theme.colorScheme.onSurface),
+                        onPressed: () {
                           widget.prevPage();
                           resetTimer();
                         },
                       ),
                       IconButton(
-                        icon: Icon(isRunning ? Icons.pause : Icons.play_arrow,
-                            color: const Color.fromARGB(255, 255, 255, 255)),
+                        icon: Icon(
+                            isRunning ? Icons.pause : Icons.play_arrow,
+                            color: theme.colorScheme.onSurface),
                         onPressed: () {
                           if (isRunning) {
                             stopTimer();
@@ -197,8 +217,9 @@ class _CountdownTimerState extends State<CountdownTimer> {
                         },
                       ),
                       IconButton(
-                        icon: Icon(Icons.arrow_forward_ios, color: const Color.fromARGB(255, 255, 255, 255)),
-                        onPressed: (){
+                        icon: Icon(Icons.arrow_forward_ios,
+                            color: theme.colorScheme.onSurface),
+                        onPressed: () {
                           widget.nextPage();
                           resetTimer();
                         },

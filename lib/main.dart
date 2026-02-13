@@ -1,20 +1,22 @@
 import 'package:dchakra/pages/welcome_page.dart';
+import 'package:dchakra/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.black,
-        body: WelcomePage(),
-      ),
-      theme: ThemeData(brightness: Brightness.dark),
+      title: 'Dchakra',
+      themeMode: ThemeMode.system,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      home: const WelcomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

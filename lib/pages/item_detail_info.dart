@@ -3,23 +3,24 @@ import 'package:dchakra/icons/logo.dart';
 import 'package:dchakra/pages/level_documentation.dart';
 import 'package:dchakra/pages/yoga&meditaton/balance_menu.dart';
 import 'package:dchakra/pages/yoga&meditaton/mantra_chant.dart';
+import 'package:dchakra/navbar.dart';
 import 'package:flutter/material.dart';
 
 Color getChakraColor(String colorName) {
   switch (colorName.toLowerCase()) {
-    case 'red':       // Root Chakra
+    case 'red': // Root Chakra
       return const Color.fromARGB(255, 183, 28, 28); // Deep Red
-    case 'orange':    // Sacral Chakra
+    case 'orange': // Sacral Chakra
       return const Color.fromARGB(255, 255, 87, 34); // Bright Orange
-    case 'yellow':    // Solar Plexus Chakra
+    case 'yellow': // Solar Plexus Chakra
       return const Color.fromARGB(255, 255, 193, 7); // Sunny Yellow
-    case 'green':     // Heart Chakra
+    case 'green': // Heart Chakra
       return const Color.fromARGB(255, 76, 175, 80); // Vibrant Green
-    case 'blue':      // Throat Chakra
+    case 'blue': // Throat Chakra
       return const Color.fromARGB(255, 33, 150, 243); // Calm Blue
-    case 'indigo':    // Third Eye Chakra
+    case 'indigo': // Third Eye Chakra
       return const Color.fromARGB(255, 63, 81, 181); // Deep Indigo
-    case 'violet':    // Crown Chakra
+    case 'violet': // Crown Chakra
       return const Color.fromARGB(255, 156, 39, 176); // Elegant Violet
     default:
       return Colors.grey; // fallback neutral color
@@ -50,8 +51,9 @@ class ItemDetailInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Stack(
           children: [
@@ -59,15 +61,15 @@ class ItemDetailInfo extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   width: double.infinity,
                   child: Row(
                     children: [
-                      BackButton(),
+                      const BackButton(),
                       Center(
                         child: Text(
                           name,
-                          style: TextStyle(
+                          style: theme.textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.w600,
                             fontSize: 18,
                           ),
@@ -76,78 +78,19 @@ class ItemDetailInfo extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 300,child: Hero(tag: name, child: Image.asset(image))),
+                SizedBox(
+                    height: 300,
+                    child: Hero(tag: name, child: Image.asset(image))),
                 Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        width: double.infinity,
-                        child: Row(
-                          children: [
-                            const Text(
-                              "Element : ",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(element),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        width: double.infinity,
-                        child: Row(
-                          children: [
-                            const Text(
-                              "Location : ",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Expanded(child: Text(location)),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        width: double.infinity,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Function : ",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Expanded(child: Text(function)),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        width: double.infinity,
-                        child: Row(
-                          children: [
-                            const Text(
-                              "Mantra : ",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(mantra),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        width: double.infinity,
-                        child: Row(
-                          children: [
-                            const Text(
-                              "Color : ",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text(color),
-                          ],
-                        ),
-                      ),
+                      _buildInfoRow(context, "Element", element),
+                      _buildInfoRow(context, "Location", location),
+                      _buildInfoRow(context, "Function", function),
+                      _buildInfoRow(context, "Mantra", mantra),
+                      _buildInfoRow(context, "Color", color),
                     ],
                   ),
                 ),
@@ -164,22 +107,54 @@ class ItemDetailInfo extends StatelessWidget {
                     child: BtnTheme(
                       text: "Yogasana",
                       color: getChakraColor(color),
-                      child: BalanceMenu(yogasana: yogasana,name: name,color: color,),
+                      child: BalanceMenu(
+                        yogasana: yogasana,
+                        name: name,
+                        color: color,
+                      ),
                     ),
                   ),
                   Center(
                     child: BtnTheme(
                       text: "Meditate",
                       color: getChakraColor(color),
-                      child: MantraChant(chakraName: name,getClr: getChakraColor(color),),
+                      child: MantraChant(
+                        chakraName: name,
+                        getClr: getChakraColor(color),
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            botmNavBar()
+            botmNavBar(context)
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(BuildContext context, String label, String value) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      width: double.infinity,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "$label : ",
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ),
+        ],
       ),
     );
   }

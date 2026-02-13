@@ -9,7 +9,7 @@ class Documentation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Stack(
           children: [
@@ -19,7 +19,7 @@ class Documentation extends StatelessWidget {
               child: SizedBox(
                 height: 650,
                 width: 650,
-                child: AppLogo(size: 350),
+                child: Opacity(opacity: 0.4, child: AppLogo(size: 350)),
               ),
             ),
             Center(child: LinrGrage()),
@@ -30,23 +30,28 @@ class Documentation extends StatelessWidget {
                 child: Center(
                   child: SequentialFadeDemo(
                     onDone: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return LevelDocumentation();
-                          },
-                        ),
-                      );
+                      Navigator.of(context)
+                          .pushReplacement(MaterialPageRoute(builder: (builder) {
+                        return LevelDocumentation();
+                      }));
                     },
                   ),
                 ),
               ),
             ),
-            Positioned(bottom: 40,left: 120,right: 120,child: IconButton.outlined(onPressed: (){
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (builder){
-                return LevelDocumentation();
-              }));
-            }, icon: Icon(Icons.arrow_forward_rounded)))
+            Positioned(
+                bottom: 40,
+                left: 120,
+                right: 120,
+                child: IconButton.outlined(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushReplacement(MaterialPageRoute(builder: (builder) {
+                        return LevelDocumentation();
+                      }));
+                    },
+                    icon: Icon(Icons.arrow_forward_rounded,
+                        color: Theme.of(context).colorScheme.onSurface)))
           ],
         ),
       ),

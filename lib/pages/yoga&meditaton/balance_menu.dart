@@ -91,33 +91,80 @@ class _BalanceMenuState extends State<BalanceMenu> {
     if (_phase == SessionPhase.pose) {
       _flutterTts.speak("3, 2, 1, stop");
 
-      setState(() {
-        _phase = SessionPhase.rest;
-      });
+      // Check if there is a next pose
+      if (_currentPage < widget.yogasana.length - 1) {
+        setState(() {
+          _currentPage++;
+          _phase = SessionPhase.rest;
+        });
+
+        _pageController.animateToPage(
+          _currentPage,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      } else {
+        // Last pose completed
+        _flutterTts.speak("Session complete. Well done.");
+        _sessionRunning = false;
+        // Handle session completion (e.g., navigate back or show summary)
+        // For now, maybe just stop? Or go back?
+        Navigator.of(context).pop();
+      }
     } else {
-      _goToNextPose();
+      // Rest phase ended, start next pose
+      setState(() {
+        _phase = SessionPhase.pose;
+      });
     }
   }
 
   // ---------------- FLOW CONTROL ----------------
 
   void _goToNextPose() async {
+    // Manual skip functionality
     if (_currentPage >= widget.yogasana.length - 1) {
       _flutterTts.speak("Session complete. Well done.");
       _sessionRunning = false;
+      Navigator.of(context).pop();
       return;
     }
 
-    setState(() {
-      _currentPage++;
-      _phase = SessionPhase.pose;
-    });
+    if (_phase == SessionPhase.pose) {
+      // Skip pose -> go to rest of next pose? Or just go to next pose directly?
+      // Usually 'Next' button implies "I'm done with this, give me the next thing".
+      // If currently in Pose, user might want to skip to Rest (of next item) or skip Rest entirely?
+      // Let's assume manual 'Next' skips to the Next Pose (Pose Phase) to be fast.
+      setState(() {
+        _currentPage++;
+        _phase = SessionPhase.pose;
+      });
+    } else {
+      // currently in Rest, skip rest -> go to Pose
+      setState(() {
+        _phase = SessionPhase.pose;
+      });
+    }
 
     await _pageController.animateToPage(
       _currentPage,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
+  }
+
+  void _goToPrevPose() async {
+    if (_currentPage > 0) {
+      setState(() {
+        _currentPage--;
+        _phase = SessionPhase.pose;
+      });
+      await _pageController.animateToPage(
+        _currentPage,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 
   void startYogaSession() {
@@ -146,9 +193,10 @@ class _BalanceMenuState extends State<BalanceMenu> {
   @override
   Widget build(BuildContext context) {
     final keys = widget.yogasana.keys.toList();
+    final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Stack(
           children: [
@@ -159,79 +207,83 @@ class _BalanceMenuState extends State<BalanceMenu> {
               left: -320,
               child: Opacity(opacity: 0.1, child: AppLogo()),
             ),
-
             Positioned(
               top: 0,
               left: 10,
               right: 10,
-              height: 40,
+              height: 60,
               child: Row(
                 children: [
-                  const BackButton(color: Colors.white),
+                  const BackButton(),
                   Text(
                     widget.name,
-                    style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
             ),
-
             Positioned(
-              top: 40,
+              top: 60,
               left: 0,
               right: 0,
-              height: 650,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 440,
-                    child: PageView.builder(
-                      controller: _pageController,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: widget.yogasana.length,
-                      itemBuilder: (context, index) {
-                        final item =
-                            widget.yogasana[keys[index]] as Map<String, dynamic>?;
-                        final imagePath =
-                            item?['image'] ?? 'assets/placeholder.png';
+              bottom: 100,
+              child: PageView.builder(
+                controller: _pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: widget.yogasana.length,
+                itemBuilder: (context, index) {
+                  final item =
+                      widget.yogasana[keys[index]] as Map<String, dynamic>?;
+                  final imagePath = item?['image'] ?? 'assets/placeholder.png';
 
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(18),
-                                color: const Color.fromARGB(228, 255, 255, 255),
-                              ),
+                  return Center(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: theme.cardColor, // Added background color
+                              borderRadius: BorderRadius.circular(24),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: theme.shadowColor.withOpacity(0.2),
+                                  blurRadius: 15,
+                                  offset: const Offset(0, 8),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(24),
                               child: Image.asset(
                                 imagePath,
                                 height: 340,
+                                width: double.infinity, // Ensure it fills width
+                                fit: BoxFit.contain, // Changed from cover to contain
                               ),
                             ),
-                            const SizedBox(height: 8),
-                            Text(
-                              keys[index],
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 16),
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            keys[index],
+                            style: theme.textTheme.headlineMedium,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            _phase == SessionPhase.pose ? "Hold Pose" : "Rest",
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: theme.colorScheme.secondary,
                             ),
-                            const SizedBox(height: 6),
-                            Text(
-                              _phase == SessionPhase.pose
-                                  ? "Hold Pose"
-                                  : "Rest",
-                              style: const TextStyle(
-                                  color: Colors.grey, fontSize: 14),
-                            ),
-                          ],
-                        );
-                      },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
 
@@ -239,14 +291,14 @@ class _BalanceMenuState extends State<BalanceMenu> {
             Positioned(
               left: 0,
               right: 0,
-              bottom: 85,
+              bottom: 40,
               child: CountdownTimer(
                 key: ValueKey("$_currentPage-$_phase"),
                 maxSeconds:
                     _phase == SessionPhase.pose ? poseDuration : restDuration,
                 color: getChakraColor(widget.color),
-                nextPage: () {},
-                prevPage: () {},
+                nextPage: _goToNextPose,
+                prevPage: _goToPrevPose,
                 onTimerEnd: _onTimerEnd,
                 onHalfTime: _onHalfTime,
                 onInitialCountdown: _onInitialCountdown,

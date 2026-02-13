@@ -1,5 +1,6 @@
 import 'package:dchakra/icons/chakra_list.dart';
 import 'package:dchakra/icons/logo.dart';
+import 'package:dchakra/navbar.dart';
 import 'package:flutter/material.dart';
 
 class LevelDocumentation extends StatelessWidget {
@@ -7,17 +8,20 @@ class LevelDocumentation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Stack(
           children: [
-            Positioned(
-              top: 55,
-              height: 650,
-              width: 650,
-              left: -320,
-              child: Opacity(opacity: 0.1,child: SizedBox(child: AppLogo())),
+            Center(
+              child: Positioned(
+                top: 55,
+                height: 650,
+                width: 650,
+                // left: -320,
+                child: Opacity(opacity: 0.4, child: SizedBox(child: AppLogo())),
+              ),
             ),
             Center(child: LinrGrage()),
             Center(
@@ -36,8 +40,7 @@ class LevelDocumentation extends StatelessWidget {
                         child: Center(
                           child: Text(
                             "Chakra Progress Tracker",
-                            style: const TextStyle(
-                              color: Color.fromARGB(207, 255, 255, 255),
+                            style: theme.textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.w500,
                               fontSize: 22,
                             ),
@@ -45,10 +48,10 @@ class LevelDocumentation extends StatelessWidget {
                         ),
                       ),
                     ),
-                    botmNavBar(),
+                    botmNavBar(context),
                     Positioned(
                       child: Container(
-                        margin: EdgeInsets.fromLTRB(0, 85, 0, 71),
+                        margin: const EdgeInsets.fromLTRB(0, 85, 0, 71),
                         height: double.infinity,
                         width: double.infinity,
                         child: Center(child: ContainList()),
@@ -65,48 +68,3 @@ class LevelDocumentation extends StatelessWidget {
   }
 }
 
-botmNavBar() {
-  return Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(
-                        height: 70,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          border: BorderDirectional(
-                            top: BorderSide(
-                              width: 1,
-                              color: const Color.fromARGB(22, 255, 255, 255),
-                            ),
-                          ),
-                        ),
-                        child: Container(
-                          margin: const EdgeInsets.all(10.0),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.home_rounded),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.calendar_month_rounded),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.settings),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.person),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-}

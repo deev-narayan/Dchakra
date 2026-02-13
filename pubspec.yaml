@@ -65,6 +65,9 @@ flutter:
     - assets/swadhisthana/
     - assets/manipura/
     - assets/anahata/
+    - assets/vishuddha/
+    - assets/ajna/
+    - assets/sahasrara/
 
   fonts:
     - family: 'fancy'

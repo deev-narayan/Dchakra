@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class AppLogo extends StatelessWidget {
@@ -12,6 +11,10 @@ class AppLogo extends StatelessWidget {
     final double border1 = size * (320 / 278);
     final double border2 = size * (418 / 278);
     final double border3 = size * (611 / 278);
+
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final borderColor = isDark ? Colors.white : Colors.black;
 
     return SizedBox(
       width: border3,
@@ -27,7 +30,7 @@ class AppLogo extends StatelessWidget {
               borderRadius: BorderRadius.circular(900),
               border: Border.all(
                 width: 1,
-                color: const Color.fromARGB(8, 255, 255, 255),
+                color: borderColor.withOpacity(0.03),
               ),
             ),
           ),
@@ -39,7 +42,7 @@ class AppLogo extends StatelessWidget {
               borderRadius: BorderRadius.circular(900),
               border: Border.all(
                 width: 1,
-                color: const Color.fromARGB(13, 255, 255, 255),
+                color: borderColor.withOpacity(0.05),
               ),
             ),
           ),
@@ -51,7 +54,7 @@ class AppLogo extends StatelessWidget {
               borderRadius: BorderRadius.circular(900),
               border: Border.all(
                 width: 1,
-                color: const Color.fromARGB(38, 255, 255, 255),
+                color: borderColor.withOpacity(0.15),
               ),
             ),
           ),
@@ -69,37 +72,45 @@ class AppLogo extends StatelessWidget {
 
 class GlassEffect extends StatelessWidget {
   final Widget child;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
+  final double radius;
 
   //constructor
 
   const GlassEffect({
     super.key,
     required this.child,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
+    this.radius = 0,
   });
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // Increased blur for better effect
         child: Container(
           width: width,
           height: height,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                const Color.fromARGB(6, 248, 223, 140),
-                const Color.fromARGB(22, 0, 0, 0),
+                const Color.fromARGB(20, 255, 255, 255), // Lighter top for shine
+                const Color.fromARGB(10, 0, 0, 0),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
+            borderRadius: BorderRadius.circular(radius),
+             border: Border.all(
+              color: Colors.white.withValues(alpha: 0.1),
+              width: 1.5,
+            ),
           ),
-          child: Center(child: child),
+          child: child,
         ),
       ),
     );
