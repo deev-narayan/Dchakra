@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class SequentialFadeDemo extends StatefulWidget {
   final VoidCallback? onDone; // 👈 callback for when the sequence finishes
+  final String username;
 
-  const SequentialFadeDemo({super.key, this.onDone});
+  const SequentialFadeDemo({super.key, this.onDone, required this.username});
 
   @override
   State<SequentialFadeDemo> createState() => _SequentialFadeDemoState();
@@ -32,7 +33,6 @@ class _SequentialFadeDemoState extends State<SequentialFadeDemo> {
       fontSize: 40,
       fontFamily: 'fancy',
       fontWeight: FontWeight.w100,
-      color: Color.fromARGB(47, 255, 255, 255),
     );
 
     return Center(
@@ -56,8 +56,8 @@ class _SequentialFadeDemoState extends State<SequentialFadeDemo> {
                     begin: 0.0,
                     end: 1.0,
                     onFadeComplete: _nextStep,
-                    child: const Text(
-                      "Hello\nDivyansh",
+                    child: Text(
+                      "Hello\n${widget.username}",
                       textAlign: TextAlign.center,
                       style: textStyle,
                     ),

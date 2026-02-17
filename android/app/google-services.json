@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "827752782201",
+    "project_id": "dchakra-78845",
+    "storage_bucket": "dchakra-78845.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827752782201:android:5718cd6c52311adcd2f7a8",
+        "android_client_info": {
+          "package_name": "com.example.dchakra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "827752782201-nf29nr4vuhl12i4b8u9jo1t0mbdf0idn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dchakra",
+            "certificate_hash": "f8c576e6fae898ee6d0c9efe5899aa5b9beebd8e"
+          }
+        },
+        {
+          "client_id": "827752782201-5hek0g26um8eiohgkumi91vvm92u0vlo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8UeR78_UminImrCVTGjkKoU-D1ynzjpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "827752782201-5hek0g26um8eiohgkumi91vvm92u0vlo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "827752782201-fd1o2ot78qmbrrprub5834vtie56kka9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dchakra"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

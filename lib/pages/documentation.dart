@@ -4,7 +4,9 @@ import 'package:dchakra/pages/level_documentation.dart';
 import 'package:flutter/material.dart';
 
 class Documentation extends StatelessWidget {
-  const Documentation({super.key});
+  final String username;
+
+  const Documentation({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class Documentation extends StatelessWidget {
                 height: double.infinity,
                 child: Center(
                   child: SequentialFadeDemo(
+                    username: username,
                     onDone: () {
                       Navigator.of(context)
                           .pushReplacement(MaterialPageRoute(builder: (builder) {
