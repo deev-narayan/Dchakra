@@ -3,10 +3,22 @@ import 'package:dchakra/icons/logo.dart';
 import 'package:dchakra/navbar.dart';
 import 'package:dchakra/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:dchakra/notifiers.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LevelDocumentation extends StatelessWidget {
+class LevelDocumentation extends StatefulWidget {
   const LevelDocumentation({super.key});
+
+  @override
+  State<LevelDocumentation> createState() => _LevelDocumentationState();
+}
+
+class _LevelDocumentationState extends State<LevelDocumentation> {
+  @override
+  void initState() {
+    super.initState();
+    selectedIndexNotifier.value = 0; // Preset to Home
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -27,7 +27,7 @@ class CountdownTimer extends StatefulWidget {
   State<CountdownTimer> createState() => _CountdownTimerState();
 }
 
-class _CountdownTimerState extends State<CountdownTimer> {
+class _CountdownTimerState extends State<CountdownTimer> with WidgetsBindingObserver {
   late int seconds;
   bool isRunning = false;
   Timer? timer;
@@ -37,6 +37,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this); // Register observer
     seconds = 3;
     startInitialCountdown();
   }
@@ -124,8 +125,18 @@ class _CountdownTimerState extends State<CountdownTimer> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this); // Unregister observer
     timer?.cancel();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+      if (isRunning) {
+        stopTimer(); // Pause timer on background
+      }
+    }
   }
 
   @override

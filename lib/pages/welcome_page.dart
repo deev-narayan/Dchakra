@@ -78,82 +78,86 @@ class _WelcomePageState extends State<WelcomePage>
           // 3. Main Content
           SafeArea(
             child: AnimationLimiter(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: AnimationConfiguration.toStaggeredList(
-                  duration: const Duration(milliseconds: 800),
-                  childAnimationBuilder: (widget) => SlideAnimation(
-                    verticalOffset: 50.0,
-                    child: FadeInAnimation(
-                      child: widget,
-                    ),
-                  ),
-                  children: [
-                    // --- Animated Logo ---
-                    Center(
-                      child: AnimatedBuilder(
-                        animation: _scaleAnimation,
-                        builder: (context, child) {
-                          return Transform.scale(
-                            scale: _scaleAnimation.value,
-                            child: child,
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(1.0),
-                                blurRadius: 60,
-                                spreadRadius: -110,
-                              )
-                            ]
-                          ),
-                          child: const Hero(
-                              tag: 'appLogoHero', 
-                              child: AppLogo(size: 280)
-                          ),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: AnimationConfiguration.toStaggeredList(
+                      duration: const Duration(milliseconds: 800),
+                      childAnimationBuilder: (widget) => SlideAnimation(
+                        verticalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: widget,
                         ),
                       ),
-                    ),
-                    
-                    const SizedBox(height: 40),
+                      children: [
+                        // --- Animated Logo ---
+                        Center(
+                          child: AnimatedBuilder(
+                            animation: _scaleAnimation,
+                            builder: (context, child) {
+                              return Transform.scale(
+                                scale: _scaleAnimation.value,
+                                child: child,
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(1.0),
+                                    blurRadius: 60,
+                                    spreadRadius: -110,
+                                  )
+                                ]
+                              ),
+                              child: const Hero(
+                                  tag: 'appLogoHero', 
+                                  child: AppLogo(size: 280)
+                              ),
+                            ),
+                          ),
+                        ),
+                        
+                        const SizedBox(height: 40),
 
-                    // --- Brand Title ---
-                    Text(
-                      "Dchakra",
-                      style: GoogleFonts.cinzel(
-                        fontSize: 48,
-                        fontWeight: FontWeight.bold,
-                        color: theme.textTheme.displayLarge?.color,
-                        letterSpacing: 2.0,
-                      ),
-                    ),
-                    
-                    const SizedBox(height: 12),
+                        // --- Brand Title ---
+                        Text(
+                          "Dchakra",
+                          style: GoogleFonts.cinzel(
+                            fontSize: 48,
+                            fontWeight: FontWeight.bold,
+                            color: theme.textTheme.displayLarge?.color,
+                            letterSpacing: 2.0,
+                          ),
+                        ),
+                        
+                        const SizedBox(height: 12),
 
-                    // --- Tagline ---
-                    Text(
-                      "Balance Your Energy",
-                      style: GoogleFonts.outfit(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 3.0,
-                        color: theme.textTheme.bodyLarge?.color?.withOpacity(0.7),
-                      ),
-                    ),
+                        // --- Tagline ---
+                        Text(
+                          "Balance Your Energy",
+                          style: GoogleFonts.outfit(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: 3.0,
+                            color: theme.textTheme.bodyLarge?.color?.withOpacity(0.7),
+                          ),
+                        ),
 
-                    const SizedBox(height: 80),
+                        const SizedBox(height: 80),
 
-                    // --- Sign In Button ---
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: _buildPremiumGoogleButton(context, theme, isDark),
+                        // --- Sign In Button ---
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          child: _buildPremiumGoogleButton(context, theme, isDark),
+                        ),
+                        
+                        const SizedBox(height: 40),
+                      ],
                     ),
-                    
-                    const SizedBox(height: 40),
-                  ],
+                  ),
                 ),
               ),
             ),

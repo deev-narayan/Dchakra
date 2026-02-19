@@ -19,9 +19,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.windows:
         return windows;
       case TargetPlatform.linux:
-        throw UnsupportedError(
-          'FirebaseOptions are not configured for linux.',
-        );
+        return web; // Fallback to Web options for Linux
       default:
         throw UnsupportedError(
           'FirebaseOptions are not supported for this platform.',

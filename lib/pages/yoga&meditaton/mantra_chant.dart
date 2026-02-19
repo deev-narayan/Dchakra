@@ -14,12 +14,13 @@ class MantraChant extends StatefulWidget {
   State<MantraChant> createState() => _MantraChantState();
 }
 
-class _MantraChantState extends State<MantraChant> {
+class _MantraChantState extends State<MantraChant> with WidgetsBindingObserver {
   final FlutterTts _flutterTts = FlutterTts();
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this); // Register observer
     initTTS();
   }
 
@@ -37,8 +38,16 @@ class _MantraChantState extends State<MantraChant> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this); // Unregister observer
     _flutterTts.stop();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused || state == AppLifecycleState.inactive) {
+      _flutterTts.stop(); // Stop TTS on background
+    }
   }
 
   @override
