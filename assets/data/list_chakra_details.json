@@ -9,7 +9,7 @@
     "image": "assets/images/Muladhara.png",
     "yogasana": {
       "Child Pose": {
-        "image": "assets/muladhara/1.png",
+        "image": "assets/muladhara/1.jpg",
         "steps": [
           "Kneel on the floor with your big toes touching and knees apart.",
           "Sit back on your heels and stretch your arms forward on the floor.",
@@ -18,7 +18,7 @@
         ]
       },
       "Malasana": {
-        "image": "assets/muladhara/2.png",
+        "image": "assets/muladhara/2.jpg",
         "steps": [
           "Stand with your feet slightly wider than hip-width.",
           "Squat down and bring your palms together in front of your chest.",
@@ -27,7 +27,7 @@
         ]
       },
       "Savasana": {
-        "image": "assets/muladhara/3.png",
+        "image": "assets/muladhara/3.jpg",
         "steps": [
           "Lie flat on your back with legs comfortably apart.",
           "Let your arms rest at your sides, palms facing up.",
@@ -36,7 +36,7 @@
         ]
       },
       "Tadasana": {
-        "image": "assets/muladhara/4.png",
+        "image": "assets/muladhara/4.jpg",
         "steps": [
           "Stand tall with feet together and arms at your sides.",
           "Distribute weight evenly on both feet.",
@@ -45,7 +45,7 @@
         ]
       },
       "Virabhadrasana": {
-        "image": "assets/muladhara/5.png",
+        "image": "assets/muladhara/5.jpg",
         "steps": [
           "Step one foot forward and bend the front knee.",
           "Keep the back leg straight and heels grounded.",
@@ -54,7 +54,7 @@
         ]
       },
       "Vrksasana": {
-        "image": "assets/muladhara/6.png",
+        "image": "assets/muladhara/6.jpg",
         "steps": [
           "Stand tall with arms at your sides.",
           "Shift weight to one leg and place the other foot on the inner thigh.",
@@ -74,7 +74,7 @@
     "image": "assets/images/Swadhisthana.png",
     "yogasana": {
       "Baddha Konasana": {
-        "image": "assets/swadhisthana/1.png",
+        "image": "assets/swadhisthana/1.jpg",
         "steps": [
           "Sit on the floor with legs extended.",
           "Bring the soles of your feet together and let your knees drop to the sides.",
@@ -83,7 +83,7 @@
         ]
       },
       "Garbha Pindasana": {
-        "image": "assets/swadhisthana/2.png",
+        "image": "assets/swadhisthana/2.jpg",
         "steps": [
           "Sit on the floor with legs extended.",
           "Cross your legs and thread your arms through them.",
@@ -92,7 +92,7 @@
         ]
       },
       "Seated Forward Bend": {
-        "image": "assets/swadhisthana/3.png",
+        "image": "assets/swadhisthana/3.jpg",
         "steps": [
           "Sit with legs extended in front of you.",
           "Inhale and lengthen your spine.",
@@ -101,7 +101,7 @@
         ]
       },
       "Boat Pose": {
-        "image": "assets/swadhisthana/4.png",
+        "image": "assets/swadhisthana/4.jpg",
         "steps": [
           "Sit on the floor with knees bent and feet on the floor.",
           "Lift your feet off the floor and straighten your legs to form a 'V'.",
@@ -110,7 +110,7 @@
         ]
       },
       "Cat-Cow Pose": {
-        "image": "assets/swadhisthana/5.png",
+        "image": "assets/swadhisthana/5.jpg",
         "steps": [
           "Start on hands and knees in a tabletop position.",
           "Inhale, drop your belly, lift your head and tailbone (Cow Pose).",
@@ -119,7 +119,7 @@
         ]
       },
       "Bridge Pose": {
-        "image": "assets/swadhisthana/6.png",
+        "image": "assets/swadhisthana/6.jpg",
         "steps": [
           "Lie on your back with knees bent and feet hip-width apart.",
           "Press your feet and arms into the floor to lift your hips.",
@@ -139,7 +139,7 @@
     "image": "assets/images/Manipura.png",
     "yogasana": {
       "Boat Pose": {
-        "image": "assets/manipura/1.png",
+        "image": "assets/manipura/1.jpg",
         "steps": [
           "Sit on the floor with knees bent and feet flat.",
           "Lift your feet off the floor and straighten your legs to form a 'V'.",
@@ -148,7 +148,7 @@
         ]
       },
       "Navasana": {
-        "image": "assets/manipura/2.png",
+        "image": "assets/manipura/2.jpg",
         "steps": [
           "Sit on the floor with legs extended.",
           "Lift legs and torso to form a 'V' shape.",
@@ -157,7 +157,7 @@
         ]
       },
       "Warrior Pose": {
-        "image": "assets/manipura/3.png",
+        "image": "assets/manipura/3.jpg",
         "steps": [
           "Step one foot forward, bend the knee, keep the other leg straight.",
           "Raise your arms above your head, palms facing each other.",
@@ -166,7 +166,7 @@
         ]
       },
       "Bow Pose": {
-        "image": "assets/manipura/4.png",
+        "image": "assets/manipura/4.jpg",
         "steps": [
           "Lie on your stomach, bend your knees and hold your ankles.",
           "Lift your chest and thighs off the floor.",
@@ -175,7 +175,7 @@
         ]
       },
       "Plank Pose": {
-        "image": "assets/manipura/5.png",
+        "image": "assets/manipura/5.jpg",
         "steps": [
           "Start in push-up position.",
           "Keep arms straight and body in a straight line from head to heels.",
@@ -184,7 +184,7 @@
         ]
       },
       "Cobra Pose": {
-        "image": "assets/manipura/6.png",
+        "image": "assets/manipura/6.jpg",
         "steps": [
           "Lie on your stomach, place hands under shoulders.",
           "Press hands to lift chest off the floor.",
@@ -204,7 +204,7 @@
     "image": "assets/images/Anahata.png",
     "yogasana": {
       "Camel Pose": {
-        "image": "assets/anahata/1.png",
+        "image": "assets/anahata/1.jpg",
         "steps": [
           "Kneel on the floor with knees hip-width apart.",
           "Place hands on your lower back for support.",
@@ -213,7 +213,7 @@
         ]
       },
       "Bridge Pose": {
-        "image": "assets/anahata/2.png",
+        "image": "assets/anahata/2.jpg",
         "steps": [
           "Lie on your back with knees bent and feet hip-width apart.",
           "Lift your hips and chest toward the ceiling.",
@@ -222,7 +222,7 @@
         ]
       },
       "Cobra Pose": {
-        "image": "assets/anahata/3.png",
+        "image": "assets/anahata/3.jpg",
         "steps": [
           "Lie on your stomach, hands under shoulders.",
           "Lift chest off the floor while keeping elbows slightly bent.",
@@ -231,7 +231,7 @@
         ]
       },
       "Fish Pose": {
-        "image": "assets/anahata/4.png",
+        "image": "assets/anahata/4.jpg",
         "steps": [
           "Lie on your back with legs extended.",
           "Place hands under hips and lift chest upward.",
@@ -240,7 +240,7 @@
         ]
       },
       "Upward Facing Dog": {
-        "image": "assets/anahata/5.png",
+        "image": "assets/anahata/5.jpg",
         "steps": [
           "Lie on your stomach, hands under shoulders.",
           "Press hands to lift torso and thighs off the floor.",
@@ -249,7 +249,7 @@
         ]
       },
       "Cow Face Pose": {
-        "image": "assets/anahata/6.png",
+        "image": "assets/anahata/6.jpg",
         "steps": [
           "Sit on the floor with legs crossed or stacked.",
           "Place one arm behind your back and the other over the shoulder.",
@@ -269,7 +269,7 @@
     "image": "assets/images/Vishuddha.png",
     "yogasana": {
       "Plow Pose": {
-        "image": "assets/vishuddha/1.png",
+        "image": "assets/vishuddha/1.jpg",
         "steps": [
           "Lie on your back with arms at sides.",
           "Lift legs and hips over your head.",
@@ -278,7 +278,7 @@
         ]
       },
       "Shoulder Stand": {
-        "image": "assets/vishuddha/2.png",
+        "image": "assets/vishuddha/2.jpg",
         "steps": [
           "Lie on your back and lift legs overhead.",
           "Support your lower back with hands.",
@@ -287,7 +287,7 @@
         ]
       },
       "Fish Pose": {
-        "image": "assets/vishuddha/3.png",
+        "image": "assets/vishuddha/3.jpg",
         "steps": [
           "Lie on your back with legs extended.",
           "Place hands under hips for support.",
@@ -296,7 +296,7 @@
         ]
       },
       "Lion Pose": {
-        "image": "assets/vishuddha/4.png",
+        "image": "assets/vishuddha/4.jpg",
         "steps": [
           "Kneel or sit comfortably.",
           "Inhale deeply through the nose.",
@@ -305,7 +305,7 @@
         ]
       },
       "Bridge Pose": {
-        "image": "assets/vishuddha/5.png",
+        "image": "assets/vishuddha/5.jpg",
         "steps": [
           "Lie on your back with knees bent, feet hip-width apart.",
           "Press feet and arms into floor to lift hips.",
@@ -314,7 +314,7 @@
         ]
       },
       "Cat Pose": {
-        "image": "assets/vishuddha/6.png",
+        "image": "assets/vishuddha/6.jpg",
         "steps": [
           "Start on hands and knees in a tabletop position.",
           "Exhale, round your spine, tucking chin to chest (Cat Pose).",
@@ -334,7 +334,7 @@
     "image": "assets/images/Ajna.png",
     "yogasana": {
       "Child Pose": {
-        "image": "assets/ajna/1.png",
+        "image": "assets/ajna/1.jpg",
         "steps": [
           "Kneel on the floor with big toes touching and knees apart.",
           "Sit back on your heels and stretch arms forward on the floor.",
@@ -343,7 +343,7 @@
         ]
       },
       "Downward Dog": {
-        "image": "assets/ajna/2.png",
+        "image": "assets/ajna/2.jpg",
         "steps": [
           "Start on hands and knees.",
           "Lift hips towards the ceiling forming an inverted 'V'.",
@@ -352,7 +352,7 @@
         ]
       },
       "Easy Pose": {
-        "image": "assets/ajna/3.png",
+        "image": "assets/ajna/3.jpg",
         "steps": [
           "Sit cross-legged on the floor with a straight spine.",
           "Rest hands on knees, palms up or down.",
@@ -361,7 +361,7 @@
         ]
       },
       "Seated Forward Fold": {
-        "image": "assets/ajna/4.png",
+        "image": "assets/ajna/4.jpg",
         "steps": [
           "Sit with legs extended.",
           "Inhale, lengthen the spine.",
@@ -370,7 +370,7 @@
         ]
       },
       "Plow Pose": {
-        "image": "assets/ajna/5.png",
+        "image": "assets/ajna/5.jpg",
         "steps": [
           "Lie on your back with arms at sides.",
           "Lift legs and hips, bringing feet over your head.",
@@ -379,7 +379,7 @@
         ]
       },
       "Corpse Pose": {
-        "image": "assets/ajna/6.png",
+        "image": "assets/ajna/6.jpg",
         "steps": [
           "Lie flat on your back with arms at sides.",
           "Keep legs apart comfortably and palms facing up.",
@@ -399,7 +399,7 @@
     "image": "assets/images/Sahasrara.png",
     "yogasana": {
       "Headstand": {
-        "image": "assets/sahasrara/1.png",
+        "image": "assets/sahasrara/1.jpg",
         "steps": [
           "Kneel on the floor and place forearms on the ground, fingers interlaced.",
           "Place crown of head on floor cradled by hands.",
@@ -408,7 +408,7 @@
         ]
       },
       "Corpse Pose": {
-        "image": "assets/sahasrara/2.png",
+        "image": "assets/sahasrara/2.jpg",
         "steps": [
           "Lie flat on your back with arms at sides.",
           "Keep legs comfortably apart and palms facing up.",
@@ -417,7 +417,7 @@
         ]
       },
       "Lotus Pose": {
-        "image": "assets/sahasrara/3.png",
+        "image": "assets/sahasrara/3.jpg",
         "steps": [
           "Sit on the floor, cross legs with feet on opposite thighs.",
           "Rest hands on knees in a mudra.",
@@ -426,7 +426,7 @@
         ]
       },
       "Child Pose": {
-        "image": "assets/sahasrara/4.png",
+        "image": "assets/sahasrara/4.jpg",
         "steps": [
           "Kneel on the floor with big toes touching and knees apart.",
           "Sit back on heels and stretch arms forward.",
@@ -435,7 +435,7 @@
         ]
       },
       "Tree Pose": {
-        "image": "assets/sahasrara/5.png",
+        "image": "assets/sahasrara/5.jpg",
         "steps": [
           "Stand tall with arms at sides.",
           "Shift weight to one leg, place other foot on inner thigh or calf.",
@@ -444,7 +444,7 @@
         ]
       },
       "Seated Meditation": {
-        "image": "assets/sahasrara/6.png",
+        "image": "assets/sahasrara/6.jpg",
         "steps": [
           "Sit cross-legged with straight spine.",
           "Rest hands on knees, palms up or down.",

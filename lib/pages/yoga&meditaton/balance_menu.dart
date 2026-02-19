@@ -106,10 +106,12 @@ class _BalanceMenuState extends State<BalanceMenu> {
       } else {
         // Last pose completed
         _flutterTts.speak("Session complete. Well done.");
+        _flutterTts.setCompletionHandler(() {
+          Navigator.of(context).pop();
+        });
         _sessionRunning = false;
         // Handle session completion (e.g., navigate back or show summary)
         // For now, maybe just stop? Or go back?
-        Navigator.of(context).pop();
       }
     } else {
       // Rest phase ended, start next pose
