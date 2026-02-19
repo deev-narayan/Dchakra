@@ -162,12 +162,12 @@ class _CountdownTimerState extends State<CountdownTimer> {
             borderRadius: BorderRadius.circular(25),
             child: Stack(
               children: [
-                // Main container background
+                // Main container background - REMOVED/TRANSPARENT
                 Container(
                   width: fullWidth,
                   height: height,
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.surfaceVariant.withOpacity(0.5),
+                    color: Colors.transparent, // Made transparent to use parent's glassmorphism
                     borderRadius: BorderRadius.circular(25),
                   ),
                 ),

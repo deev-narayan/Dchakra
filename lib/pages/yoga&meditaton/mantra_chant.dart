@@ -72,12 +72,15 @@ class _MantraChantState extends State<MantraChant> {
             bottom: 120, // Adjusted to avoid overlap with NavBar (height 70)
             left: 20,
             right: 20,
-            child: CountdownTimer(
-              color: widget.getClr,
-              maxSeconds: 300,
-              nextPage: () {},
-              prevPage: () {},
-              onTimerEnd: _onTimerEnd,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: CountdownTimer(
+                color: widget.getClr,
+                maxSeconds: 300,
+                nextPage: () {},
+                prevPage: () {},
+                onTimerEnd: _onTimerEnd,
+              ),
             ),
           ),
             botmNavBar(context),

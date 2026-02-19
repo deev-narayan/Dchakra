@@ -1,8 +1,11 @@
 import 'package:dchakra/icons/logo.dart';
 import 'package:dchakra/pages/item_detail_info.dart';
 import 'package:dchakra/pages/yoga&meditaton/timer_bar.dart';
+import 'package:dchakra/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 enum SessionPhase { pose, rest }
 
@@ -100,8 +103,8 @@ class _BalanceMenuState extends State<BalanceMenu> {
 
         _pageController.animateToPage(
           _currentPage,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOutQuart,
         );
       } else {
         // Last pose completed
@@ -110,8 +113,6 @@ class _BalanceMenuState extends State<BalanceMenu> {
           Navigator.of(context).pop();
         });
         _sessionRunning = false;
-        // Handle session completion (e.g., navigate back or show summary)
-        // For now, maybe just stop? Or go back?
       }
     } else {
       // Rest phase ended, start next pose
@@ -124,7 +125,6 @@ class _BalanceMenuState extends State<BalanceMenu> {
   // ---------------- FLOW CONTROL ----------------
 
   void _goToNextPose() async {
-    // Manual skip functionality
     if (_currentPage >= widget.yogasana.length - 1) {
       _flutterTts.speak("Session complete. Well done.");
       _sessionRunning = false;
@@ -133,10 +133,6 @@ class _BalanceMenuState extends State<BalanceMenu> {
     }
 
     if (_phase == SessionPhase.pose) {
-      // Skip pose -> go to rest of next pose? Or just go to next pose directly?
-      // Usually 'Next' button implies "I'm done with this, give me the next thing".
-      // If currently in Pose, user might want to skip to Rest (of next item) or skip Rest entirely?
-      // Let's assume manual 'Next' skips to the Next Pose (Pose Phase) to be fast.
       setState(() {
         _currentPage++;
         _phase = SessionPhase.pose;
@@ -150,8 +146,8 @@ class _BalanceMenuState extends State<BalanceMenu> {
 
     await _pageController.animateToPage(
       _currentPage,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOutQuart,
     );
   }
 
@@ -163,8 +159,8 @@ class _BalanceMenuState extends State<BalanceMenu> {
       });
       await _pageController.animateToPage(
         _currentPage,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOutQuart,
       );
     }
   }
@@ -196,109 +192,252 @@ class _BalanceMenuState extends State<BalanceMenu> {
   Widget build(BuildContext context) {
     final keys = widget.yogasana.keys.toList();
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final totalPoses = widget.yogasana.length;
+
+    // Helper to get efficient chakra color
+    Color accentColor = getChakraColor(widget.color);
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Positioned(
-              top: 55,
-              height: 650,
-              width: 650,
-              left: -320,
-              child: Opacity(opacity: 0.1, child: AppLogo()),
-            ),
-            Positioned(
-              top: 0,
-              left: 10,
-              right: 10,
-              height: 60,
-              child: Row(
-                children: [
-                  const BackButton(),
-                  Text(
-                    widget.name,
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+      body: Stack(
+        children: [
+          // 1. Background Gradient
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: isDark ? AppTheme.darkGradient : AppTheme.lightGradient,
               ),
             ),
-            Positioned(
-              top: 60,
-              left: 0,
-              right: 0,
-              bottom: 100,
-              child: PageView.builder(
-                controller: _pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: widget.yogasana.length,
-                itemBuilder: (context, index) {
-                  final item =
-                      widget.yogasana[keys[index]] as Map<String, dynamic>?;
-                  final imagePath = item?['image'] ?? 'assets/placeholder.png';
+          ),
 
-                  return Center(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: theme.cardColor, // Added background color
-                              borderRadius: BorderRadius.circular(24),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: theme.shadowColor.withOpacity(0.2),
-                                  blurRadius: 15,
-                                  offset: const Offset(0, 8),
-                                ),
-                              ],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(24),
-                              child: Image.asset(
-                                imagePath,
-                                height: 340,
-                                width: double.infinity, // Ensure it fills width
-                                fit: BoxFit.contain, // Changed from cover to contain
+          // 2. Decorative Background
+          Positioned(
+            top: -50,
+            right: -100,
+            child: Opacity(
+              opacity: 0.02,
+              child: Transform.rotate(
+                angle: -0.2,
+                child: const AppLogo(size: 800),
+              ),
+            ),
+          ),
+
+          // 3. Header & Content
+          SafeArea(
+            child: Column(
+              children: [
+                // Header Row
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                  child: Row(
+                    children: [
+                      // Custom Back Button
+                      Container(
+                        decoration: BoxDecoration(
+                          color: theme.cardColor.withOpacity(0.5),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const BackButton(),
+                      ),
+                      const SizedBox(width: 12),
+                      
+                      // Title
+                      Expanded(
+                        child: Text(
+                          widget.name,
+                          style: GoogleFonts.cinzel(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: theme.textTheme.titleLarge?.color,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      
+                      // Progress Indicator (Pose X/Y)
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: accentColor.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: accentColor.withOpacity(0.3),
+                          ),
+                        ),
+                        child: Text(
+                          "Step ${_currentPage + 1} / $totalPoses",
+                          style: GoogleFonts.outfit(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: isDark ? accentColor.withOpacity(0.9) : accentColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Main Content Area
+                Expanded(
+                  child: PageView.builder(
+                    controller: _pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: totalPoses,
+                    itemBuilder: (context, index) {
+                      final item =
+                          widget.yogasana[keys[index]] as Map<String, dynamic>?;
+                      final imagePath = item?['image'] ?? 'assets/placeholder.png';
+
+                      return AnimationConfiguration.synchronized(
+                        duration: const Duration(milliseconds: 600),
+                        child: SlideAnimation(
+                          verticalOffset: 50.0,
+                          child: FadeInAnimation(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const SizedBox(height: 20),
+                                  // Image Card - Restored Glass Container but Transparent Inner Background
+                                  Center(
+                                    child: Container(
+                                      margin: const EdgeInsets.symmetric(horizontal: 32),
+                                      decoration: BoxDecoration(
+                                        color: isDark 
+                                            ? Colors.white.withOpacity(0.05) 
+                                            : Colors.white.withOpacity(0.40), // Reduced opacity for blend
+                                        borderRadius: BorderRadius.circular(40),
+                                        border: Border.all(
+                                          color: Colors.white.withOpacity(isDark ? 0.1 : 0.3), 
+                                          width: 1.5
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: accentColor.withOpacity(0.2),
+                                            blurRadius: 30,
+                                            offset: const Offset(0, 15),
+                                            spreadRadius: -5,
+                                          ),
+                                        ],
+                                      ),
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: AspectRatio(
+                                          aspectRatio: 1.0, 
+                                          child: Image.asset(
+                                            imagePath,
+                                            fit: BoxFit.contain,
+                                            // No specific blend needed if image is transparent
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  
+                                  const SizedBox(height: 32),
+
+                                  // Pose Name
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                                    child: Text(
+                                      keys[index],
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.cinzel(
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.w600,
+                                        color: theme.textTheme.displaySmall?.color,
+                                        height: 1.2,
+                                      ),
+                                    ),
+                                  ),
+                                  
+                                  const SizedBox(height: 24),
+
+                                  // Animated Status Pill
+                                  AnimatedContainer(
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut,
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 32,
+                                      vertical: 12,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: _phase == SessionPhase.pose
+                                          ? [
+                                              accentColor,
+                                              accentColor.withOpacity(0.7),
+                                            ]
+                                          : [
+                                              theme.colorScheme.secondary,
+                                              theme.colorScheme.secondary.withOpacity(0.7),
+                                            ],
+                                          begin: Alignment.topLeft,
+                                          end: Alignment.bottomRight,
+                                      ),
+                                      borderRadius: BorderRadius.circular(50),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: (_phase == SessionPhase.pose 
+                                              ? accentColor 
+                                              : theme.colorScheme.secondary).withOpacity(0.3),
+                                          blurRadius: 12,
+                                          offset: const Offset(0, 6),
+                                        ),
+                                      ],
+                                    ),
+                                    child: AnimatedSwitcher(
+                                      duration: const Duration(milliseconds: 300),
+                                      transitionBuilder: (Widget child, Animation<double> animation) {
+                                        return FadeTransition(opacity: animation, child: child);
+                                      },
+                                      child: Text(
+                                        _phase == SessionPhase.pose ? "HOLD POSE" : "REST NOW",
+                                        key: ValueKey(_phase),
+                                        style: GoogleFonts.outfit(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 2.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  
+                                  const SizedBox(height: 140), // Spacing for bottom timer
+                                ],
                               ),
                             ),
                           ),
-                          const SizedBox(height: 16),
-                          Text(
-                            keys[index],
-                            style: theme.textTheme.headlineMedium,
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            _phase == SessionPhase.pose ? "Hold Pose" : "Rest",
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: theme.colorScheme.secondary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
+          ),
 
-            ///  TIMER CONTROLS EVERYTHING
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 40,
+          // 4. Floating Timer Controls
+          Positioned(
+            left: 20,
+            right: 20,
+            bottom: 30,
+            child: Container(
+               // Glassmorphism Timer Container
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
               child: CountdownTimer(
                 key: ValueKey("$_currentPage-$_phase"),
                 maxSeconds:
                     _phase == SessionPhase.pose ? poseDuration : restDuration,
-                color: getChakraColor(widget.color),
+                color: accentColor,
                 nextPage: _goToNextPose,
                 prevPage: _goToPrevPose,
                 onTimerEnd: _onTimerEnd,
@@ -307,8 +446,8 @@ class _BalanceMenuState extends State<BalanceMenu> {
                 onPhaseEnd: () {},
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
