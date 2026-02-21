@@ -7,6 +7,7 @@
     "function": "improve the survival and basic human instinct",
     "mantra": "Lam",
     "image": "assets/images/Muladhara.png",
+    "music": "assets/mantra/1.mp3",
     "yogasana": {
       "Child Pose": {
         "image": "assets/muladhara/1.jpg",
@@ -72,6 +73,7 @@
     "function": "reproductive health and creative energy",
     "mantra": "Vam",
     "image": "assets/images/Swadhisthana.png",
+    "music": "assets/mantra/2.mp3",
     "yogasana": {
       "Baddha Konasana": {
         "image": "assets/swadhisthana/1.jpg",
@@ -137,6 +139,7 @@
     "function": "digestive health, along with power and self-esteem",
     "mantra": "Ram",
     "image": "assets/images/Manipura.png",
+    "music": "assets/mantra/3.mp3",
     "yogasana": {
       "Boat Pose": {
         "image": "assets/manipura/1.jpg",
@@ -202,6 +205,7 @@
     "function": "responsible for inner peace, love and devotion",
     "mantra": "Yam",
     "image": "assets/images/Anahata.png",
+    "music": "assets/mantra/4.mp3",
     "yogasana": {
       "Camel Pose": {
         "image": "assets/anahata/1.jpg",
@@ -267,6 +271,7 @@
     "function": "communication and self-expression",
     "mantra": "Ham",
     "image": "assets/images/Vishuddha.png",
+    "music": "assets/mantra/5.mp3",
     "yogasana": {
       "Plow Pose": {
         "image": "assets/vishuddha/1.jpg",
@@ -332,6 +337,7 @@
     "function": "intuition and imagination",
     "mantra": "om",
     "image": "assets/images/Ajna.png",
+    "music": "assets/mantra/6.mp3",
     "yogasana": {
       "Child Pose": {
         "image": "assets/ajna/1.jpg",
@@ -397,6 +403,7 @@
     "function": "spiritual connection and enlightenment",
     "mantra": "ah",
     "image": "assets/images/Sahasrara.png",
+    "music": "assets/mantra/7.mp3",
     "yogasana": {
       "Headstand": {
         "image": "assets/sahasrara/1.jpg",

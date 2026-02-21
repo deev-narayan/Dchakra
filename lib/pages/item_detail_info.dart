@@ -34,6 +34,7 @@ class ItemDetailInfo extends StatelessWidget {
   final String location;
   final String function;
   final String mantra;
+  final String music;
   final Map<String, Map<String, dynamic>> yogasana;
 
   const ItemDetailInfo({
@@ -45,7 +46,7 @@ class ItemDetailInfo extends StatelessWidget {
     required this.location,
     required this.function,
     required this.mantra,
-    required this.yogasana,
+    required this.yogasana, required this.music,
   });
 
   @override
@@ -306,6 +307,7 @@ class ItemDetailInfo extends StatelessWidget {
                         child: MantraChant(
                           chakraName: name,
                           getClr: chakraColor,
+                          audioUrl: music,
                         ),
                       ),
                     ),

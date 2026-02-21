@@ -1,14 +1,15 @@
+import 'package:dchakra/audio_page.dart';
 import 'package:dchakra/icons/logo.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:dchakra/navbar.dart' show botmNavBar;
 import 'package:dchakra/pages/yoga&meditaton/timer_bar.dart';
 import 'package:flutter/material.dart';
 
 class MantraChant extends StatefulWidget {
   final String chakraName;
   final Color getClr;
+  final String audioUrl;
   const MantraChant(
-      {super.key, required this.chakraName, required this.getClr});
+      {super.key, required this.chakraName, required this.getClr, required this.audioUrl});
 
   @override
   State<MantraChant> createState() => _MantraChantState();
@@ -30,10 +31,7 @@ class _MantraChantState extends State<MantraChant> with WidgetsBindingObserver {
   }
 
   void _onTimerEnd() {
-    _flutterTts.speak("Meditation complete. Namaste.");
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Meditation complete. Namaste.")),
-    );
+    _flutterTts.speak("Meditation complete.");
   }
 
   @override
@@ -82,22 +80,27 @@ class _MantraChantState extends State<MantraChant> with WidgetsBindingObserver {
               child: Opacity(opacity: 0.1, child: AppLogo(size: screenWidth * 0.6)),
             ),
           ),
+          AudioPage(audioUrl: widget.audioUrl),
           Positioned(
-            bottom: (screenHeight * 0.15).clamp(120.0, 200.0), // Adjusted to avoid overlap with NavBar
+            bottom: (screenHeight * 0.05).clamp(120.0, 200.0), // Adjusted to avoid overlap with NavBar
             left: screenWidth * 0.05,
             right: screenWidth * 0.05,
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 4),
+              padding: const EdgeInsets.symmetric(vertical: 2),
               child: CountdownTimer(
-                color: widget.getClr,
-                maxSeconds: 300,
-                nextPage: () {},
-                prevPage: () {},
-                onTimerEnd: _onTimerEnd,
+              color: widget.getClr,
+              maxSeconds: 300,
+              nextPage: (){},
+              prevPage: () {},
+                onTimerEnd: () {
+                _onTimerEnd();
+                Future.delayed(Duration(seconds: 1), () {
+                  Navigator.of(context).pop(); // Navigate back when timer ends
+                });
+                },
               ),
             ),
           ),
-            botmNavBar(context),
         ],
       ),
     );

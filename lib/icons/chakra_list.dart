@@ -74,6 +74,7 @@ class _ContainListState extends State<ContainList> {
                   location: item['location'] as String? ?? '',
                   function: item['function'] as String? ?? '',
                   mantra: item['mantra'] as String? ?? '',
+                  music: item['music'] as String? ?? '',
                   yogasana: yogasanaMap,
                 ),
               ),
@@ -95,6 +96,7 @@ class ChakraList extends StatelessWidget {
   final String location;
   final String function;
   final String mantra;
+  final String music;
   final Map<String, Map<String, dynamic>> yogasana;
 
   const ChakraList({
@@ -106,7 +108,7 @@ class ChakraList extends StatelessWidget {
     required this.location,
     required this.function,
     required this.mantra,
-    required this.yogasana,
+    required this.yogasana, required this.music,
   });
 
   @override
@@ -137,6 +139,7 @@ class ChakraList extends StatelessWidget {
                       function: function,
                       mantra: mantra,
                       yogasana: yogasana,
+                      music: music,
                     );
                   },
                 ),
