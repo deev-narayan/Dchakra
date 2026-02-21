@@ -141,8 +141,12 @@ class _CountdownTimerState extends State<CountdownTimer> with WidgetsBindingObse
 
   @override
   Widget build(BuildContext context) {
-    double fullWidth = 320;
-    double height = 80;
+    final size = MediaQuery.of(context).size;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
+
+    double fullWidth = (screenWidth * 0.85).clamp(280.0, 450.0);
+    double height = (screenHeight * 0.08).clamp(60.0, 90.0);
     double progress = 1 - (seconds / widget.maxSeconds);
     final theme = Theme.of(context);
 
@@ -161,8 +165,9 @@ class _CountdownTimerState extends State<CountdownTimer> with WidgetsBindingObse
                     return "${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}";
                   }(),
             style: theme.textTheme.displayMedium?.copyWith(
+              fontSize: (screenWidth * 0.12).clamp(32.0, 64.0),
               fontWeight: FontWeight.w600,
-              color: theme.colorScheme.onBackground,
+              color: theme.colorScheme.onSurface,
             ),
           ),
         ),

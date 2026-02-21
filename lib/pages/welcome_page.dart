@@ -45,6 +45,16 @@ class _WelcomePageState extends State<WelcomePage>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final size = MediaQuery.of(context).size;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
+
+
+    final logoSize = (screenWidth * 0.4).clamp(150.0, 220.0); 
+    final titleFontSize = (screenWidth * 0.12).clamp(32.0, 56.0);
+    final taglineFontSize = (screenWidth * 0.045).clamp(14.0, 20.0);
+    final buttonPadding = (screenWidth * 0.1).clamp(20.0, 60.0);
+    final buttonHeight = (screenHeight * 0.07).clamp(50.0, 65.0);
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
@@ -70,7 +80,7 @@ class _WelcomePageState extends State<WelcomePage>
                child: Image.asset(
                  'assets/images/dchakra.png',
                  repeat: ImageRepeat.noRepeat,
-                 scale: 1.0,
+                 fit: BoxFit.cover,
                ),
              ),
           ),
@@ -80,82 +90,91 @@ class _WelcomePageState extends State<WelcomePage>
             child: AnimationLimiter(
               child: Center(
                 child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: AnimationConfiguration.toStaggeredList(
-                      duration: const Duration(milliseconds: 800),
-                      childAnimationBuilder: (widget) => SlideAnimation(
-                        verticalOffset: 50.0,
-                        child: FadeInAnimation(
-                          child: widget,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: AnimationConfiguration.toStaggeredList(
+                        duration: const Duration(milliseconds: 800),
+                        childAnimationBuilder: (widget) => SlideAnimation(
+                          verticalOffset: 50.0,
+                          child: FadeInAnimation(
+                            child: widget,
+                          ),
                         ),
-                      ),
-                      children: [
-                        // --- Animated Logo ---
-                        Center(
-                          child: AnimatedBuilder(
-                            animation: _scaleAnimation,
-                            builder: (context, child) {
-                              return Transform.scale(
-                                scale: _scaleAnimation.value,
-                                child: child,
-                              );
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(1.0),
-                                    blurRadius: 60,
-                                    spreadRadius: -110,
-                                  )
-                                ]
-                              ),
-                              child: const Hero(
-                                  tag: 'appLogoHero', 
-                                  child: AppLogo(size: 280)
+                        children: [
+                          // --- Animated Logo ---
+                          Center(
+                            child: AnimatedBuilder(
+                              animation: _scaleAnimation,
+                              builder: (context, child) {
+                                return Transform.scale(
+                                  scale: _scaleAnimation.value,
+                                  child: child,
+                                );
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.5),
+                                      blurRadius: 60,
+                                      spreadRadius: -30,
+                                    )
+                                  ]
+                                ),
+                                child: Hero(
+                                    tag: 'appLogoHero', 
+                                    child: AppLogo(size: logoSize)
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        
-                        const SizedBox(height: 40),
+                          
+                          SizedBox(height: screenHeight * 0.04),
 
-                        // --- Brand Title ---
-                        Text(
-                          "Dchakra",
-                          style: GoogleFonts.cinzel(
-                            fontSize: 48,
-                            fontWeight: FontWeight.bold,
-                            color: theme.textTheme.displayLarge?.color,
-                            letterSpacing: 2.0,
+                          // --- Brand Title ---
+                          Text(
+                            "Dchakra",
+                            style: GoogleFonts.cinzel(
+                              fontSize: titleFontSize,
+                              fontWeight: FontWeight.bold,
+                              color: theme.textTheme.displayLarge?.color,
+                              letterSpacing: 2.0,
+                            ),
                           ),
-                        ),
-                        
-                        const SizedBox(height: 12),
+                          
+                          SizedBox(height: screenHeight * 0.01),
 
-                        // --- Tagline ---
-                        Text(
-                          "Balance Your Energy",
-                          style: GoogleFonts.outfit(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            letterSpacing: 3.0,
-                            color: theme.textTheme.bodyLarge?.color?.withOpacity(0.7),
+                          // --- Tagline ---
+                          Text(
+                            "Balance Your Energy",
+                            style: GoogleFonts.outfit(
+                              fontSize: taglineFontSize,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: 3.0,
+                              color: theme.textTheme.bodyLarge?.color?.withOpacity(0.7),
+                            ),
                           ),
-                        ),
 
-                        const SizedBox(height: 80),
+                          SizedBox(height: screenHeight * 0.08),
 
-                        // --- Sign In Button ---
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40),
-                          child: _buildPremiumGoogleButton(context, theme, isDark),
-                        ),
-                        
-                        const SizedBox(height: 40),
-                      ],
+                          // --- Sign In Button ---
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: buttonPadding),
+                            child: _buildPremiumGoogleButton(
+                              context, 
+                              theme, 
+                              isDark, 
+                              screenWidth,
+                              buttonHeight,
+                            ),
+                          ),
+                          
+                          SizedBox(height: screenHeight * 0.04),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -167,7 +186,16 @@ class _WelcomePageState extends State<WelcomePage>
     );
   }
 
-  Widget _buildPremiumGoogleButton(BuildContext context, ThemeData theme, bool isDark) {
+  Widget _buildPremiumGoogleButton(
+    BuildContext context, 
+    ThemeData theme, 
+    bool isDark, 
+    double screenWidth,
+    double height,
+  ) {
+    final buttonTextFontSize = (screenWidth * 0.042).clamp(14.0, 18.0);
+    final iconSize = (height * 0.45).clamp(20.0, 28.0);
+
     return GestureDetector(
       onTapDown: (_) => setState(() => _isButtonPressed = true),
       onTapUp: (_) => setState(() => _isButtonPressed = false),
@@ -191,7 +219,7 @@ class _WelcomePageState extends State<WelcomePage>
         scale: _isButtonPressed ? 0.95 : 1.0,
         duration: const Duration(milliseconds: 100),
         child: Container(
-          height: 60,
+          height: height,
           decoration: BoxDecoration(
             // Gradient Border Effect
             gradient: LinearGradient(
@@ -203,7 +231,7 @@ class _WelcomePageState extends State<WelcomePage>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(height / 2),
             boxShadow: [
               // Premium Glow
               BoxShadow(
@@ -219,20 +247,17 @@ class _WelcomePageState extends State<WelcomePage>
             decoration: BoxDecoration(
               // Inner Background
               color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
-              borderRadius: BorderRadius.circular(28),
+              borderRadius: BorderRadius.circular(height / 2 - 2),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset('assets/google.png', height: 26),
-                ),
-                const SizedBox(width: 3),
+                Image.asset('assets/google.png', height: iconSize),
+                SizedBox(width: screenWidth * 0.02),
                 Text(
                   "Sign in with Google",
                   style: GoogleFonts.outfit(
-                    fontSize: 17,
+                    fontSize: buttonTextFontSize,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.5,
                     color: isDark ? Colors.white : Colors.black87,

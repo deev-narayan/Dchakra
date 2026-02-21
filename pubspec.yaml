@@ -41,6 +41,7 @@ dependencies:
   google_sign_in: ^6.1.6
   google_fonts: ^8.0.2
   flutter_staggered_animations: ^1.1.1
+  audioplayers: ^6.5.1
 
 
 dev_dependencies:
@@ -77,6 +78,7 @@ flutter:
     - assets/sahasrara/
     - assets/google.png
     - .env
+    - assets/mantra/
 
   fonts:
     - family: 'fancy'

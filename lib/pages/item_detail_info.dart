@@ -2,7 +2,6 @@ import 'package:dchakra/fade/button_theme.dart';
 import 'package:dchakra/icons/logo.dart';
 import 'package:dchakra/pages/yoga&meditaton/balance_menu.dart';
 import 'package:dchakra/pages/yoga&meditaton/mantra_chant.dart';
-import 'package:dchakra/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -53,6 +52,15 @@ class ItemDetailInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final chakraColor = getChakraColor(color);
+    final size = MediaQuery.of(context).size;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
+
+    final titleFontSize = (screenWidth * 0.06).clamp(18.0, 26.0);
+    final subtitleFontSize = (screenWidth * 0.035).clamp(12.0, 16.0);
+    final heroImageSize = (screenWidth * 0.55).clamp(180.0, 300.0);
+    final cardPadding = (screenWidth * 0.045).clamp(12.0, 24.0);
+
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
       body: SafeArea(
@@ -63,7 +71,7 @@ class ItemDetailInfo extends StatelessWidget {
               children: [
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenHeight * 0.01),
                   child: Row(
                     children: [
                       Container(
@@ -75,7 +83,7 @@ class ItemDetailInfo extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: screenWidth * 0.03),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +94,7 @@ class ItemDetailInfo extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.poppins(
-                                fontSize: 20,
+                                fontSize: titleFontSize,
                                 fontWeight: FontWeight.w700,
                                 letterSpacing: 0.4,
                                 color: theme.colorScheme.onSurface,
@@ -98,7 +106,7 @@ class ItemDetailInfo extends StatelessWidget {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.lato(
-                                fontSize: 12,
+                                fontSize: subtitleFontSize,
                                 color: theme.textTheme.bodySmall?.color
                                     ?.withOpacity(0.7),
                               ),
@@ -131,11 +139,11 @@ class ItemDetailInfo extends StatelessWidget {
                 ),
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 140),
+                    padding: EdgeInsets.fromLTRB(16, 8, 16, screenHeight * 0.15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const SizedBox(height: 12),
+                        SizedBox(height: screenHeight * 0.02),
                         Center(
                           child: Container(
                             padding: const EdgeInsets.all(12),
@@ -163,15 +171,15 @@ class ItemDetailInfo extends StatelessWidget {
                               child: ClipOval(
                                 child: Image.asset(
                                   image,
-                                  height: 220,
-                                  width: 220,
+                                  height: heroImageSize,
+                                  width: heroImageSize,
                                   fit: BoxFit.contain,
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: screenHeight * 0.03),
                         Wrap(
                           spacing: 8,
                           runSpacing: 8,
@@ -204,7 +212,7 @@ class ItemDetailInfo extends StatelessWidget {
                         ),
                         const SizedBox(height: 24),
                         Container(
-                          padding: const EdgeInsets.all(18),
+                          padding: EdgeInsets.all(cardPadding),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(24),
                             color: theme.cardColor.withOpacity(0.96),
@@ -272,11 +280,11 @@ class ItemDetailInfo extends StatelessWidget {
               ],
             ),
             Positioned(
-              bottom: 90,
+              bottom: (screenHeight * 0.04).clamp(10.0, 40.0),
               left: 0,
               right: 0,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
                 child: Row(
                   children: [
                     Expanded(
@@ -290,7 +298,7 @@ class ItemDetailInfo extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    SizedBox(width: screenWidth * 0.03),
                     Expanded(
                       child: BtnTheme(
                         text: "Meditate",
@@ -305,7 +313,6 @@ class ItemDetailInfo extends StatelessWidget {
                 ),
               ),
             ),
-            botmNavBar(context)
           ],
         ),
       ),

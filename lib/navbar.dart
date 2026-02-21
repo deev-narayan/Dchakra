@@ -1,5 +1,8 @@
 import 'package:dchakra/notifiers.dart';
 import 'package:dchakra/pages/level_documentation.dart';
+import 'package:dchakra/routs/profile_page.dart';
+import 'package:dchakra/routs/schedule_page.dart';
+import 'package:dchakra/routs/setting_page.dart';
 import 'package:flutter/material.dart';
 
 Widget botmNavBar(BuildContext context) {
@@ -15,7 +18,7 @@ Widget botmNavBar(BuildContext context) {
       decoration: BoxDecoration(
         color: theme.scaffoldBackgroundColor,
       ),
-      child: Container(
+      child: SizedBox(
         child: ValueListenableBuilder<int>(
           valueListenable: selectedIndexNotifier,
           builder: (context, selectedIndex, child) {
@@ -29,7 +32,7 @@ Widget botmNavBar(BuildContext context) {
                   isSelected: selectedIndex == 0,
                   onTap: () {
                     selectedIndexNotifier.value = 0;
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => const LevelDocumentation()),
                     );
@@ -42,7 +45,10 @@ Widget botmNavBar(BuildContext context) {
                   isSelected: selectedIndex == 1,
                   onTap: () {
                     selectedIndexNotifier.value = 1;
-                    // TODO: Navigate to Calendar
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SchedulePage()),
+                    );
                   },
                 ),
                 _buildNavItem(
@@ -52,7 +58,10 @@ Widget botmNavBar(BuildContext context) {
                   isSelected: selectedIndex == 2,
                   onTap: () {
                     selectedIndexNotifier.value = 2;
-                    // TODO: Navigate to Settings
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SettingPage()),
+                    );
                   },
                 ),
                 _buildNavItem(
@@ -62,7 +71,10 @@ Widget botmNavBar(BuildContext context) {
                   isSelected: selectedIndex == 3,
                   onTap: () {
                     selectedIndexNotifier.value = 3;
-                    // TODO: Navigate to Profile
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ProfilePage()),
+                    );
                   },
                 ),
               ],

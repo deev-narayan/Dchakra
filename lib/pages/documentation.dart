@@ -10,18 +10,22 @@ class Documentation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Stack(
           children: [
             Positioned(
-              top: 55,
-              right: -320,
+              top: screenHeight * 0.05,
+              right: -screenWidth * 0.5,
               child: SizedBox(
-                height: 650,
-                width: 650,
-                child: Opacity(opacity: 0.4, child: AppLogo(size: 350)),
+                height: screenHeight * 0.8,
+                width: screenHeight * 0.8,
+                child: Opacity(opacity: 0.4, child: AppLogo(size: screenWidth * 0.5)),
               ),
             ),
             Center(child: LinrGrage()),
@@ -43,9 +47,9 @@ class Documentation extends StatelessWidget {
               ),
             ),
             Positioned(
-                bottom: 40,
-                left: 120,
-                right: 120,
+                bottom: screenHeight * 0.05,
+                left: screenWidth * 0.3,
+                right: screenWidth * 0.3,
                 child: IconButton.outlined(
                     onPressed: () {
                       Navigator.of(context)

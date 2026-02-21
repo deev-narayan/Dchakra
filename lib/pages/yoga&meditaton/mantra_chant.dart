@@ -53,6 +53,10 @@ class _MantraChantState extends State<MantraChant> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final size = MediaQuery.of(context).size;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
+
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
@@ -61,6 +65,7 @@ class _MantraChantState extends State<MantraChant> with WidgetsBindingObserver {
           widget.chakraName,
           style: theme.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
+            fontSize: (screenWidth * 0.055).clamp(18.0, 24.0),
           ),
         ),
         backgroundColor: Colors.transparent,
@@ -69,18 +74,18 @@ class _MantraChantState extends State<MantraChant> with WidgetsBindingObserver {
       body: Stack(
         children: [
           Positioned(
-            top: 55,
-            right: -320,
+            top: screenHeight * 0.1,
+            right: -screenWidth * 0.5,
             child: SizedBox(
-              height: 650,
-              width: 650,
-              child: Opacity(opacity: 0.1, child: AppLogo(size: 350)),
+              height: screenHeight * 0.8,
+              width: screenHeight * 0.8,
+              child: Opacity(opacity: 0.1, child: AppLogo(size: screenWidth * 0.6)),
             ),
           ),
           Positioned(
-            bottom: 120, // Adjusted to avoid overlap with NavBar (height 70)
-            left: 20,
-            right: 20,
+            bottom: (screenHeight * 0.15).clamp(120.0, 200.0), // Adjusted to avoid overlap with NavBar
+            left: screenWidth * 0.05,
+            right: screenWidth * 0.05,
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 4),
               child: CountdownTimer(

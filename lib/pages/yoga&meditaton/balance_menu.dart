@@ -194,6 +194,9 @@ class _BalanceMenuState extends State<BalanceMenu> {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final totalPoses = widget.yogasana.length;
+    final size = MediaQuery.of(context).size;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
 
     // Helper to get efficient chakra color
     Color accentColor = getChakraColor(widget.color);
@@ -217,13 +220,13 @@ class _BalanceMenuState extends State<BalanceMenu> {
 
           // 2. Decorative Background
           Positioned(
-            top: -50,
-            right: -100,
+            top: -screenHeight * 0.05,
+            right: -screenWidth * 0.3,
             child: Opacity(
               opacity: 0.02,
               child: Transform.rotate(
                 angle: -0.2,
-                child: const AppLogo(size: 800),
+                child: AppLogo(size: screenWidth * 1.8),
               ),
             ),
           ),
@@ -234,7 +237,7 @@ class _BalanceMenuState extends State<BalanceMenu> {
               children: [
                 // Header Row
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04, vertical: screenHeight * 0.015),
                   child: Row(
                     children: [
                       // Custom Back Button
@@ -245,14 +248,14 @@ class _BalanceMenuState extends State<BalanceMenu> {
                         ),
                         child: const BackButton(),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: screenWidth * 0.03),
                       
                       // Title
                       Expanded(
                         child: Text(
                           widget.name,
                           style: GoogleFonts.cinzel(
-                            fontSize: 22,
+                            fontSize: (screenWidth * 0.05).clamp(18.0, 24.0),
                             fontWeight: FontWeight.bold,
                             color: theme.textTheme.titleLarge?.color,
                           ),
@@ -273,7 +276,7 @@ class _BalanceMenuState extends State<BalanceMenu> {
                         child: Text(
                           "Step ${_currentPage + 1} / $totalPoses",
                           style: GoogleFonts.outfit(
-                            fontSize: 14,
+                            fontSize: (screenWidth * 0.035).clamp(12.0, 16.0),
                             fontWeight: FontWeight.w600,
                             color: isDark ? accentColor.withOpacity(0.9) : accentColor,
                           ),
@@ -303,11 +306,11 @@ class _BalanceMenuState extends State<BalanceMenu> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const SizedBox(height: 20),
+                                  SizedBox(height: screenHeight * 0.02),
                                   // Image Card - Restored Glass Container but Transparent Inner Background
                                   Center(
                                     child: Container(
-                                      margin: const EdgeInsets.symmetric(horizontal: 32),
+                                      margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
                                       decoration: BoxDecoration(
                                         color: isDark 
                                             ? Colors.white.withOpacity(0.05) 
@@ -341,16 +344,16 @@ class _BalanceMenuState extends State<BalanceMenu> {
                                     ),
                                   ),
                                   
-                                  const SizedBox(height: 32),
+                                  SizedBox(height: screenHeight * 0.04),
 
                                   // Pose Name
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
                                     child: Text(
                                       keys[index],
                                       textAlign: TextAlign.center,
                                       style: GoogleFonts.cinzel(
-                                        fontSize: 28,
+                                        fontSize: (screenWidth * 0.07).clamp(24.0, 36.0),
                                         fontWeight: FontWeight.w600,
                                         color: theme.textTheme.displaySmall?.color,
                                         height: 1.2,
@@ -358,7 +361,7 @@ class _BalanceMenuState extends State<BalanceMenu> {
                                     ),
                                   ),
                                   
-                                  const SizedBox(height: 24),
+                                  SizedBox(height: screenHeight * 0.03),
 
                                   // Animated Status Pill
                                   AnimatedContainer(
@@ -411,7 +414,7 @@ class _BalanceMenuState extends State<BalanceMenu> {
                                     ),
                                   ),
                                   
-                                  const SizedBox(height: 140), // Spacing for bottom timer
+                                  SizedBox(height: screenHeight * 0.2), // Spacing for bottom timer
                                 ],
                               ),
                             ),
@@ -427,9 +430,9 @@ class _BalanceMenuState extends State<BalanceMenu> {
 
           // 4. Floating Timer Controls
           Positioned(
-            left: 20,
-            right: 20,
-            bottom: 30,
+            left: screenWidth * 0.05,
+            right: screenWidth * 0.05,
+            bottom: (screenHeight * 0.04).clamp(15.0, 40.0),
             child: Container(
                // Glassmorphism Timer Container
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),

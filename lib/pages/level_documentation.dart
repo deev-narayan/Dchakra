@@ -24,6 +24,9 @@ class _LevelDocumentationState extends State<LevelDocumentation> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final size = MediaQuery.of(context).size;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
@@ -44,13 +47,13 @@ class _LevelDocumentationState extends State<LevelDocumentation> {
 
           // 2. Background Logo (Decorative)
           Positioned(
-            top: -100,
-            right: -150,
+            top: -screenHeight * 0.12,
+            right: -screenWidth * 0.35,
             child: Opacity(
               opacity: 0.15, // Subtle background element
               child: Transform.rotate(
                 angle: 0.5,
-                child: const AppLogo(size: 500),
+                child: AppLogo(size: screenWidth * 1.2),
               ),
             ),
           ),
@@ -63,7 +66,7 @@ class _LevelDocumentationState extends State<LevelDocumentation> {
               children: [
                 // Header
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+                  padding: EdgeInsets.fromLTRB(screenWidth * 0.06, screenHeight * 0.02, screenWidth * 0.06, 0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -71,7 +74,7 @@ class _LevelDocumentationState extends State<LevelDocumentation> {
                         "Your Journey",
                         style: GoogleFonts.cinzel(
                           color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7),
-                          fontSize: 16,
+                          fontSize: (screenWidth * 0.04).clamp(14.0, 18.0),
                           fontWeight: FontWeight.w500,
                           letterSpacing: 2,
                         ),
@@ -81,7 +84,7 @@ class _LevelDocumentationState extends State<LevelDocumentation> {
                         "Chakra Levels",
                         style: GoogleFonts.cinzel( // Using Cinzel for a mystical feel
                           color: theme.textTheme.titleLarge?.color,
-                          fontSize: 32,
+                          fontSize: (screenWidth * 0.08).clamp(24.0, 40.0),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -89,7 +92,7 @@ class _LevelDocumentationState extends State<LevelDocumentation> {
                   ),
                 ),
                 
-                const SizedBox(height: 16),
+                SizedBox(height: screenHeight * 0.02),
 
                 // List Content
                 Expanded(
@@ -97,7 +100,7 @@ class _LevelDocumentationState extends State<LevelDocumentation> {
                      // Add glass effect container for list area if desired, 
                      // or keep it clean. Let's try clean first, but maybe wrapping the list
                      // for valid padding.
-                     padding: const EdgeInsets.only(bottom: 80), // Space for bottom nav
+                     padding: EdgeInsets.only(bottom: screenHeight * 0.1), // Space for bottom nav
                      child: const ContainList(),
                   ),
                 ),
