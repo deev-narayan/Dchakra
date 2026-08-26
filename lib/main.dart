@@ -1,30 +1,25 @@
-import 'package:dchakra/pages/welcome_page.dart';
-import 'package:dchakra/theme.dart';
+import 'package:dchakra/config/theme.dart';
+import 'package:dchakra/pages/main_shell.dart';
+import 'package:dchakra/services/locale_service.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const MyApp());
+  await LocaleService.instance.init();
+  runApp(const DchakraApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class DchakraApp extends StatelessWidget {
+  const DchakraApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Dchakra',
       themeMode: ThemeMode.system,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      home: const WelcomePage(),
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      home: const MainShell(),
       debugShowCheckedModeBanner: false,
     );
   }
